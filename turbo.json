@@ -22,12 +22,10 @@
 			"cache": false
 		},
 		"format": {
-			"outputs": ["node_modules/.cache/.prettiercache"],
 			"outputMode": "new-only"
 		},
 		"lint": {
-			"dependsOn": ["^topo", "^build"],
-			"outputs": ["node_modules/.cache/.eslintcache"]
+			"dependsOn": ["^topo", "^build"]
 		},
 		"typecheck": {
 			"dependsOn": ["^topo", "^build"],

@@ -14,7 +14,7 @@
 		"format": "bunx @biomejs/biome format .",
 		"lint": "bunx @biomejs/biome lint .",
 		"typecheck": "tsc --noEmit --emitDeclarationOnly false",
-		"ui-add": "pnpm dlx shadcn-ui add && prettier src --write --list-different"
+		"ui-add": "pnpm dlx shadcn-ui add && @biomejs/biome format --write"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
