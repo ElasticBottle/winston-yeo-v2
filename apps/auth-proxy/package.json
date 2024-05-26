@@ -1,29 +1,25 @@
 {
-  "name": "@winston/auth-proxy",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nitro build",
-    "clean": "rm -rf .turbo node_modules",
-    "dev": "nitro dev --port 3001",
-    "lint": "eslint",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@auth/core": "0.31.0"
-  },
-  "devDependencies": {
-    "@winston/eslint-config": "workspace:*",
-    "@winston/prettier-config": "workspace:*",
-    "@winston/tailwind-config": "workspace:*",
-    "@winston/tsconfig": "workspace:*",
-    "@types/node": "^20.12.9",
-    "eslint": "^9.2.0",
-    "h3": "^1.11.1",
-    "nitropack": "^2.9.6",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
-  },
-  "prettier": "@winston/prettier-config"
+	"name": "@winston/auth-proxy",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nitro build",
+		"clean": "rm -rf .turbo node_modules",
+		"dev": "nitro dev --port 3001",
+		"lint": "bunx @biomejs/biome lint .",
+		"format": "bunx @biomejs/biome format .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@auth/core": "0.31.0"
+	},
+	"devDependencies": {
+		"@winston/biome-config": "workspace:*",
+		"@winston/tailwind-config": "workspace:*",
+		"@winston/tsconfig": "workspace:*",
+		"@types/node": "^20.12.9",
+		"h3": "^1.11.1",
+		"nitropack": "^2.9.6",
+		"typescript": "^5.4.5"
+	}
 }

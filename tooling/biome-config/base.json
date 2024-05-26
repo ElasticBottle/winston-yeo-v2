@@ -1,0 +1,48 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+	"organizeImports": { "enabled": true },
+	"linter": {
+		"enabled": true,
+		"rules": { "recommended": true }
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git"
+	},
+	"javascript": { "globals": [] },
+	"json": {
+		"parser": {
+			"allowComments": true,
+			"allowTrailingCommas": true
+		}
+	},
+	"overrides": [
+		{
+			"include": ["**/*.js", "**/*.ts", "**/*.tsx"],
+			"linter": {
+				"rules": {
+					"complexity": {},
+					"correctness": {
+						"noUnusedImports": "warn",
+						"noUnusedVariables": "warn",
+						"noUnusedPrivateClassMembers": "error"
+					},
+					"style": {
+						"useConsistentArrayType": {
+							"level": "error",
+							"options": {
+								"syntax": "generic"
+							}
+						},
+						"noNamespace": "error",
+						"useForOf": "error"
+					},
+					"suspicious": {
+						"noEmptyBlockStatements": "error",
+						"useAwait": "error"
+					}
+				}
+			}
+		}
+	]
+}

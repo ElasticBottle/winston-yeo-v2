@@ -1,0 +1,3 @@
+{
+	"extends": ["@winston/biome-config/base"]
+}

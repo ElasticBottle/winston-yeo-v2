@@ -1,0 +1,13 @@
+{
+	"name": "@winston/biome-config",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"exports": {
+		"./base": "./base.json"
+	},
+	"files": [".json"],
+	"devDependencies": {
+		"@biomejs/biome": "^1.7.3"
+	}
+}
