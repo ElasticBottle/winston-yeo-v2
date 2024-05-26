@@ -22,7 +22,6 @@
 	"devDependencies": {
 		"@winston/biome-config": "workspace:*",
 		"@winston/tsconfig": "workspace:*",
-
 		"typescript": "^5.4.5"
 	}
 }
