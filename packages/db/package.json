@@ -40,7 +40,7 @@
 		"@winston/biome-config": "workspace:*",
 		"@winston/tsconfig": "workspace:*",
 		"dotenv-cli": "^7.4.2",
-		"drizzle-kit": "^0.21.4",
+		"drizzle-kit": "^0.22.0",
 		"typescript": "^5.4.5"
 	}
 }
