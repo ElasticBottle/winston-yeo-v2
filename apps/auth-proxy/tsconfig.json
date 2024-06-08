@@ -1,4 +1,0 @@
-{
-	"extends": "@winston/tsconfig/base.json",
-	"include": ["routes"]
-}
