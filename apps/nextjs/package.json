@@ -17,6 +17,7 @@
 		"@winston/api": "workspace:*",
 		"@winston/auth": "workspace:*",
 		"@winston/db": "workspace:*",
+		"@winston/rte": "workspace:*",
 		"@winston/ui": "workspace:*",
 		"@winston/validators": "workspace:*",
 		"@t3-oss/env-nextjs": "^0.10.1",

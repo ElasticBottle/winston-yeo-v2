@@ -2,5 +2,12 @@
 	"editor.defaultFormatter": "biomejs.biome",
 	"[json]": {
 		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"tailwindCSS.classAttributes": [
+		".*Class.*",
+		"className"
+	],
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
 	}
 }

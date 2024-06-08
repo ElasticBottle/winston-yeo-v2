@@ -1,0 +1,30 @@
+{
+	"name": "@winston/rte",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*.tsx"
+	},
+	"license": "MIT",
+	"scripts": {
+		"clean": "rm -rf .turbo node_modules",
+		"format": "bunx @biomejs/biome format .",
+		"lint": "bunx @biomejs/biome lint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@winston/biome-config": "workspace:*",
+		"@winston/tailwind-config": "workspace:*",
+		"@winston/tsconfig": "workspace:*",
+		"@types/react": "^18.3.3",
+		"react": "18.3.1",
+		"tailwindcss": "^3.4.3",
+		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"@lexical/react": "^0.16.0",
+		"lexical": "^0.16.0"
+	}
+}

@@ -1,5 +1,5 @@
-import { fileURLToPath } from "node:url";
 import createJiti from "jiti";
+import { fileURLToPath } from "node:url";
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
 createJiti(fileURLToPath(import.meta.url))("./src/env");
@@ -13,6 +13,7 @@ const config = {
 		"@winston/api",
 		"@winston/auth",
 		"@winston/db",
+		"@winston/rte",
 		"@winston/ui",
 		"@winston/validators",
 	],
