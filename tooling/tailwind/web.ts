@@ -36,5 +36,5 @@ export default {
 			},
 		},
 	},
-	plugins: [animate],
+	plugins: [animate, require("tailwindcss-opentype")],
 } satisfies Config;

@@ -11,6 +11,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
@@ -18,37 +19,40 @@ import { useState } from "react";
 import { SpeechRecognitionShortcutPlugin } from "./speech-recognition-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
-	code: "editor-code  ",
+	code: "font-mono",
 	heading: {
-		h1: "editor-heading-h1",
-		h2: "editor-heading-h2",
-		h3: "editor-heading-h3",
-		h4: "editor-heading-h4",
-		h5: "editor-heading-h5",
+		h1: "text-4xl font-semibold leading-tight pb-5",
+		h2: "text-3xl font-semibold leading-tight pb-4",
+		h3: "text-2xl font-semibold leading-tight pb-3",
+		h4: "text-xl font-semibold leading-tight pb-2",
+		h5: "text-lg font-semibold leading-tight pb-1",
 	},
 	image: "editor-image",
 	link: "editor-link",
 	list: {
-		listitem: "editor-listitem",
+		listitem: "ps-2",
 		nested: {
 			listitem: "editor-nested-listitem",
 		},
-		ol: "editor-list-ol",
-		ul: "editor-list-ul",
+		ol: "list-decimal py-5 ps-6",
+		ul: "list-disc py-5 ps-6",
 	},
+
 	ltr: "ltr",
-	paragraph: "editor-paragraph",
-	placeholder: "text-muted-foreground",
-	quote: "editor-quote",
 	rtl: "rtl",
+	paragraph: "py-2",
+	quote: "py-2 px-3 border-s-4 border-primary m-2",
+	placeholder: "text-muted-foreground",
 	text: {
-		base: "text-base",
-		bold: "font-bold text-2xl",
-		code: "font-mono",
+		bold: "font-bold",
+		code: "font-mono tracking-wider",
 		italic: "italic",
-		strikethrough: "strikethrough",
+		strikethrough: "line-through",
 		underline: "underline",
 		underlineStrikethrough: "[text-decoration:underline_line-through]",
+		subscript: "subs",
+		superscript: "sups",
+		highlight: "bg-green-200",
 	},
 };
 
@@ -89,7 +93,7 @@ export function Editor() {
 				<div className="relative">
 					<RichTextPlugin
 						contentEditable={
-							<ContentEditable className=" min-h-80 text-base caret-yellow-500 outline-none px-4 py-6 bg-secondary text-secondary-foreground rounded-md" />
+							<ContentEditable className=" min-h-80 text-base caret-yellow-500 outline-none px-4 pt-4 pb-6 bg-secondary text-secondary-foreground rounded-md" />
 						}
 						placeholder={
 							<div className="absolute text-muted-foreground top-6 left-5 pointer-events-none select-none">
@@ -99,6 +103,7 @@ export function Editor() {
 						ErrorBoundary={LexicalErrorBoundary}
 					/>
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+					<ListPlugin />
 					<HistoryPlugin />
 					<AutoFocusPlugin />
 				</div>
