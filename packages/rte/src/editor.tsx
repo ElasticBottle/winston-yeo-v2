@@ -15,7 +15,7 @@ import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPl
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { useState } from "react";
-import { SpeechRecognitionShortcutPlugin } from "./speech-recogniot-recorder";
+import { SpeechRecognitionShortcutPlugin } from "./speech-recognition-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
 	code: "editor-code  ",

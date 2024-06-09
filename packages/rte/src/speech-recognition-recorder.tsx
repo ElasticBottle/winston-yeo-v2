@@ -8,7 +8,7 @@ import {
 	REDO_COMMAND,
 	UNDO_COMMAND,
 } from "lexical";
-import { useRef, useState, type Dispatch, type SetStateAction } from "react";
+import { type Dispatch, type SetStateAction, useRef, useState } from "react";
 
 export const SpeechRecognitionShortcutPlugin = ({
 	setHeardWords,
