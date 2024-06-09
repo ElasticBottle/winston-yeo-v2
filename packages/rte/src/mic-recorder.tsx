@@ -61,6 +61,7 @@ export const AudioRecorder = () => {
 				console.log("audioData", audioData);
 
 				setRecordedUrl(url);
+				console.log("recordedUrl", recordedUrl);
 			}
 		};
 
@@ -112,7 +113,6 @@ export const AudioRecorder = () => {
 
 	return (
 		<div className="w-fit">
-			<audio controls src={recordedUrl} />
 			<Toggle
 				aria-label="Toggle voice shortcut"
 				className="gap-1"
