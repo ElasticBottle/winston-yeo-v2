@@ -2,7 +2,12 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { Mic } from "@winston/ui";
 import { Toggle } from "@winston/ui/toggle";
-import { FORMAT_TEXT_COMMAND, REDO_COMMAND, UNDO_COMMAND } from "lexical";
+import {
+	$getSelection,
+	FORMAT_TEXT_COMMAND,
+	REDO_COMMAND,
+	UNDO_COMMAND,
+} from "lexical";
 import { useRef, useState } from "react";
 
 export const SpeechRecognitionShortcutPlugin = () => {
@@ -11,6 +16,7 @@ export const SpeechRecognitionShortcutPlugin = () => {
 	const autoStartCount = useRef(0);
 	const lastStartedAt = useRef(new Date().getTime());
 	const recognitionRef = useRef<SpeechRecognition | null>(null);
+	const isInsertRef = useRef(false);
 
 	const startRecording = async () => {
 		const SpeechRecognition =
@@ -46,6 +52,24 @@ export const SpeechRecognitionShortcutPlugin = () => {
 			const codeRegex = /(code|court)/i;
 			const undoRegex = /(undo|and do)/i;
 			const redoRegex = /(redo|we do)/i;
+			const insertRegex = /(inside|insert)/i;
+			const endInsertRegex = /(end|and) (inside|insert|then set)/i;
+
+			if (isInsertRef.current) {
+				editor.update(() => {
+					if (endInsertRegex.test(spokenWords)) {
+						console.log("ending insert");
+						isInsertRef.current = false;
+					}
+					const selection = $getSelection();
+					if (selection) {
+						console.log("selection", selection);
+						selection.insertText(spokenWords.replace(endInsertRegex, ""));
+						selection.getNodes()[0]?.selectEnd();
+					}
+				});
+				return;
+			}
 
 			if (boldRegex.test(spokenWords)) {
 				console.log("bolding");
@@ -74,6 +98,10 @@ export const SpeechRecognitionShortcutPlugin = () => {
 			if (undoRegex.test(spokenWords)) {
 				console.log("undoing");
 				editor.dispatchCommand(UNDO_COMMAND, undefined);
+			}
+			if (insertRegex.test(spokenWords)) {
+				console.log(`setting insert to ${!isInsertRef.current}`);
+				isInsertRef.current = !isInsertRef.current;
 			}
 		};
 
