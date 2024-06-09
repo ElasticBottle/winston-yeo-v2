@@ -5,10 +5,8 @@ import { LinkNode } from "@lexical/link";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { TRANSFORMERS } from "@lexical/markdown";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
-import {
-	LexicalComposer,
-	type InitialConfigType,
-} from "@lexical/react/LexicalComposer";
+import type { InitialConfigType } from "@lexical/react/LexicalComposer";
+import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
@@ -16,6 +14,8 @@ import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { useState } from "react";
+import { SpeechRecognitionShortcutPlugin } from "./speech-recognition-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
 	code: "editor-code  ",
@@ -75,23 +75,41 @@ export function Editor() {
 		],
 	};
 
+	const [recentlyHeard, setRecentlyHeard] = useState<string>("");
+	const [mostRecentAction, setMostRecentAction] = useState<string>("");
+
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
-			<div className="relative">
-				<RichTextPlugin
-					contentEditable={
-						<ContentEditable className=" min-h-80 text-base caret-yellow-500 outline-none px-4 py-6 bg-secondary text-secondary-foreground rounded-md" />
-					}
-					placeholder={
-						<div className="absolute text-muted-foreground top-6 left-5 pointer-events-none select-none">
-							Type to start writing...
-						</div>
-					}
-					ErrorBoundary={LexicalErrorBoundary}
+			<div className="flex flex-col gap-3">
+				<SpeechRecognitionShortcutPlugin
+					setHeardWords={setRecentlyHeard}
+					setShortcutAction={setMostRecentAction}
 				/>
-				<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
-				<HistoryPlugin />
-				<AutoFocusPlugin />
+
+				<div className="relative">
+					<RichTextPlugin
+						contentEditable={
+							<ContentEditable className=" min-h-80 text-base caret-yellow-500 outline-none px-4 py-6 bg-secondary text-secondary-foreground rounded-md" />
+						}
+						placeholder={
+							<div className="absolute text-muted-foreground top-6 left-5 pointer-events-none select-none">
+								Type to start writing...
+							</div>
+						}
+						ErrorBoundary={LexicalErrorBoundary}
+					/>
+					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+					<HistoryPlugin />
+					<AutoFocusPlugin />
+				</div>
+				<div>
+					<span className="text-muted-foreground">Last heard words: </span>{" "}
+					{recentlyHeard}
+				</div>
+				<div>
+					<span className="text-muted-foreground">Most recent action: </span>{" "}
+					{mostRecentAction}
+				</div>
 			</div>
 		</LexicalComposer>
 	);
