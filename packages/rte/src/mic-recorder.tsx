@@ -2,6 +2,22 @@ import { Mic } from "@winston/ui";
 import { Toggle } from "@winston/ui/toggle";
 import { useRef, useState } from "react";
 
+function getMimeType() {
+	const mimeTypes = [
+		"audio/webm",
+		"audio/mp4",
+		"audio/ogg",
+		"audio/wav",
+		"audio/aac",
+	];
+	for (const mimeType of mimeTypes) {
+		if (MediaRecorder.isTypeSupported(mimeType)) {
+			return mimeType;
+		}
+	}
+	return undefined;
+}
+
 export const AudioRecorder = () => {
 	const [recordedUrl, setRecordedUrl] = useState("");
 	const mediaRecorderRef = useRef<MediaRecorder | undefined>(undefined);
@@ -21,12 +37,29 @@ export const AudioRecorder = () => {
 		const mediaRecorder = new MediaRecorder(stream);
 		mediaRecorderRef.current = mediaRecorder;
 
-		mediaRecorder.ondataavailable = (e) => {
+		mediaRecorder.ondataavailable = async (e) => {
 			if (e.data.size > 0) {
 				// Do transcription here.
 				chunks.current.push(e.data);
-				const recordedBlob = new Blob(chunks.current, { type: "audio/webm" });
+				const recordedBlob = new Blob(chunks.current, { type: getMimeType() });
 				const url = URL.createObjectURL(recordedBlob);
+
+				console.log("e.data", e.data);
+
+				// TODO: FIX THIS.
+				const audioCTX = new AudioContext();
+
+				const decoded = await audioCTX.decodeAudioData(
+					await e.data.arrayBuffer(),
+				);
+				const audioData = {
+					buffer: decoded,
+					url: url,
+					source: "RECORDING",
+					mimeType: e.data.type,
+				};
+				console.log("audioData", audioData);
+
 				setRecordedUrl(url);
 			}
 		};

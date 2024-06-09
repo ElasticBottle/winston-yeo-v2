@@ -223,6 +223,9 @@ importers:
         specifier: ^0.16.0
         version: 0.16.0
     devDependencies:
+      '@types/dom-speech-recognition':
+        specifier: ^0.0.4
+        version: 0.0.4
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -1285,6 +1288,9 @@ packages:
 
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
+
+  '@types/dom-speech-recognition@0.0.4':
+    resolution: {integrity: sha512-zf2GwV/G6TdaLwpLDcGTIkHnXf8JEf/viMux+khqKQKDa8/8BAUtXXZS563GnvJ4Fg0PBLGAaFf2GekEVSZ6GQ==}
 
   '@types/glob@7.2.0':
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
@@ -3655,6 +3661,8 @@ snapshots:
       update-check: 1.5.4
 
   '@types/cookie@0.6.0': {}
+
+  '@types/dom-speech-recognition@0.0.4': {}
 
   '@types/glob@7.2.0':
     dependencies:

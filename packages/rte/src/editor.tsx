@@ -14,7 +14,7 @@ import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { AudioRecorder } from "./mic-recorder";
+import { SpeechRecognitionShortcutPlugin } from "./speech-recogniot-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
 	code: "editor-code  ",
@@ -75,9 +75,9 @@ export function Editor() {
 	};
 
 	return (
-		<div className="flex flex-col gap-3">
-			<AudioRecorder />
-			<LexicalComposer initialConfig={initialConfig}>
+		<LexicalComposer initialConfig={initialConfig}>
+			<div className="flex flex-col gap-3">
+				<SpeechRecognitionShortcutPlugin />
 				<div className="relative">
 					<RichTextPlugin
 						contentEditable={
@@ -94,7 +94,7 @@ export function Editor() {
 					<HistoryPlugin />
 					<AutoFocusPlugin />
 				</div>
-			</LexicalComposer>
-		</div>
+			</div>
+		</LexicalComposer>
 	);
 }
