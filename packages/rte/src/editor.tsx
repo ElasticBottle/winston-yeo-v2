@@ -14,6 +14,7 @@ import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { useState } from "react";
 import { SpeechRecognitionShortcutPlugin } from "./speech-recogniot-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
@@ -74,10 +75,17 @@ export function Editor() {
 		],
 	};
 
+	const [recentlyHeard, setRecentlyHeard] = useState<string>("");
+	const [mostRecentAction, setMostRecentAction] = useState<string>("");
+
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
 			<div className="flex flex-col gap-3">
-				<SpeechRecognitionShortcutPlugin />
+				<SpeechRecognitionShortcutPlugin
+					setHeardWords={setRecentlyHeard}
+					setShortcutAction={setMostRecentAction}
+				/>
+
 				<div className="relative">
 					<RichTextPlugin
 						contentEditable={
@@ -93,6 +101,14 @@ export function Editor() {
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
 					<HistoryPlugin />
 					<AutoFocusPlugin />
+				</div>
+				<div>
+					<span className="text-muted-foreground">Last heard words: </span>{" "}
+					{recentlyHeard}
+				</div>
+				<div>
+					<span className="text-muted-foreground">Most recent action: </span>{" "}
+					{mostRecentAction}
 				</div>
 			</div>
 		</LexicalComposer>

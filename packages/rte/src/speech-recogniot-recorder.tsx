@@ -8,9 +8,15 @@ import {
 	REDO_COMMAND,
 	UNDO_COMMAND,
 } from "lexical";
-import { useRef, useState } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 
-export const SpeechRecognitionShortcutPlugin = () => {
+export const SpeechRecognitionShortcutPlugin = ({
+	setHeardWords,
+	setShortcutAction,
+}: {
+	setHeardWords: Dispatch<SetStateAction<string>>;
+	setShortcutAction: Dispatch<SetStateAction<string>>;
+}) => {
 	const [editor] = useLexicalComposerContext();
 
 	const autoStartCount = useRef(0);
@@ -43,22 +49,24 @@ export const SpeechRecognitionShortcutPlugin = () => {
 			console.log("transcript", transcript);
 
 			const spokenWords = transcript.transcript;
+			setHeardWords(spokenWords);
 
 			const boldRegex =
-				/(bold|cold|both|coldnes|bowl|colt|boat|coat|boldness)/i;
+				/(bold|cold|both|coldness|bowl|colt|boat|coat|boldness)/i;
 			const italicsRegex = /(metallic|italic|i tell you)/i;
 			const underlineRegex = /(underline|on the line)/i;
 			const strikeThroughRegex = /(strike)/i;
 			const codeRegex = /(code|court)/i;
 			const undoRegex = /(undo|and do)/i;
 			const redoRegex = /(redo|we do)/i;
-			const insertRegex = /(inside|insert)/i;
+			const insertRegex = /(inside|insert|answer)/i;
 			const endInsertRegex = /(end|and) (inside|insert|then set)/i;
 
 			if (isInsertRef.current) {
 				editor.update(() => {
 					if (endInsertRegex.test(spokenWords)) {
 						console.log("ending insert");
+						setShortcutAction("Ending Speech to text");
 						isInsertRef.current = false;
 					}
 					const selection = $getSelection();
@@ -73,34 +81,42 @@ export const SpeechRecognitionShortcutPlugin = () => {
 
 			if (boldRegex.test(spokenWords)) {
 				console.log("bolding");
+				setShortcutAction("bolding");
 				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
 			}
 			if (italicsRegex.test(spokenWords)) {
 				console.log("italicizing");
+				setShortcutAction("italicizing");
 				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
 			}
 			if (underlineRegex.test(spokenWords)) {
 				console.log("underlining");
+				setShortcutAction("underlining");
 				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
 			}
 			if (strikeThroughRegex.test(spokenWords)) {
 				console.log("striking through");
+				setShortcutAction("striking through");
 				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
 			}
 			if (codeRegex.test(spokenWords)) {
 				console.log("striking through");
+				setShortcutAction("codifying");
 				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
 			}
 			if (redoRegex.test(spokenWords)) {
 				console.log("redoing");
+				setShortcutAction("redoing");
 				editor.dispatchCommand(REDO_COMMAND, undefined);
 			}
 			if (undoRegex.test(spokenWords)) {
 				console.log("undoing");
+				setShortcutAction("undoing");
 				editor.dispatchCommand(UNDO_COMMAND, undefined);
 			}
 			if (insertRegex.test(spokenWords)) {
 				console.log(`setting insert to ${!isInsertRef.current}`);
+				setShortcutAction("Begin speech to text insertion");
 				isInsertRef.current = !isInsertRef.current;
 			}
 		};
@@ -109,6 +125,9 @@ export const SpeechRecognitionShortcutPlugin = () => {
 			const timeSinceLastStart = new Date().getTime() - lastStartedAt.current;
 			autoStartCount.current += 1;
 			if (autoStartCount.current % 10 === 0) {
+				alert(
+					"Speech Recognition is running into issues. Try restarting the page.",
+				);
 				console.warn(
 					"Speech Recognition is repeatedly stopping and starting. See http://is.gd/annyang_restarts for tips.",
 				);
