@@ -51,8 +51,7 @@ export const SpeechRecognitionShortcutPlugin = ({
 			const spokenWords = transcript.transcript;
 			setHeardWords(spokenWords);
 
-			const boldRegex =
-				/(bold|cold|both|coldness|bowl|colt|boat|coat|boldness)/i;
+			const boldRegex = /(bold|cold|both|coldness|bowl|colt|boat|coat|boldness)/i;
 			const italicsRegex = /(metallic|italic|i tell you)/i;
 			const underlineRegex = /(underline|on the line)/i;
 			const strikeThroughRegex = /(strike)/i;

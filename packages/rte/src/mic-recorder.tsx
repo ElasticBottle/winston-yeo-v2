@@ -49,9 +49,7 @@ export const AudioRecorder = () => {
 				// TODO: FIX THIS.
 				const audioCTX = new AudioContext();
 
-				const decoded = await audioCTX.decodeAudioData(
-					await e.data.arrayBuffer(),
-				);
+				const decoded = await audioCTX.decodeAudioData(await e.data.arrayBuffer());
 				const audioData = {
 					buffer: decoded,
 					url: url,
