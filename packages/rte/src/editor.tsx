@@ -37,7 +37,6 @@ const themeClass: InitialConfigType["theme"] = {
 		ol: "list-decimal py-5 ps-6",
 		ul: "list-disc py-5 ps-6",
 	},
-
 	ltr: "ltr",
 	rtl: "rtl",
 	paragraph: "py-2",
