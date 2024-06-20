@@ -104,7 +104,7 @@ export function Editor() {
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
 					<ListPlugin />
 					<HistoryPlugin />
-					<AutoFocusPlugin />
+					<AutoFocusPlugin defaultSelection="rootEnd" />
 				</div>
 				<div>
 					<span className="text-muted-foreground">Last heard words: </span>{" "}
