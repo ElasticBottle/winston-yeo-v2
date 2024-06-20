@@ -14,6 +14,7 @@ import {
 
 import "react-complex-tree/lib/style-modern.css";
 import "./file-explorer-override.css";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 const NOTE_BASE_DIR = "yanta-notes";
 
@@ -174,7 +175,6 @@ class OpfsFileDataProvider
 		let path = `${currentData.path}/${newFolderName}`;
 		if (currentData.kind === "file") {
 			path = `${currentData.parent?.path}/${newFolderName}`;
-			console.log("parent path", currentData.parent?.path);
 		}
 		const newDir = dir(path);
 		if (await newDir.exists()) {
@@ -197,7 +197,9 @@ class OpfsFileDataProvider
 			if (!currentData.parent) {
 				throw new Error("Parent not found");
 			}
+			console.log("currentData.parent.name", currentData.parent.name);
 			const parentItem = this.data[currentData.parent.name];
+			console.log("parentItem", parentItem);
 			parentItem?.children?.push(newFolderName);
 		} else if (currentData.kind === "dir") {
 			currentFocusedItem.children?.push(newFolderName);
@@ -284,6 +286,19 @@ export function FileExplorer() {
 			dataProvider={dataProvider}
 			getItemTitle={(item) => item.data.name}
 			viewState={{}}
+			renderItemArrow={(item) => {
+				let body: JSX.Element | null = null;
+				if (item.item.isFolder && item.context.isExpanded) {
+					body = <ChevronDown />;
+				} else if (item.item.isFolder) {
+					body = <ChevronRight />;
+				}
+				return (
+					<div className="z-10 h-4 w-4 flex justify-center rounded-md -mr-3 items-center cursor-pointer pointer-events-none">
+						{body}
+					</div>
+				);
+			}}
 		>
 			<div className="flex w-full gap-2">
 				<Button
