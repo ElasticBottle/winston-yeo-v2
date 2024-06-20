@@ -160,7 +160,7 @@ class OpfsFileDataProvider
 		currentFocusedIndex,
 		newFolderName,
 	}: { currentFocusedIndex?: TreeItemIndex; newFolderName: string }) {
-		const { dir } = await import("opfs-tools");
+		const { dir, file } = await import("opfs-tools");
 
 		if (!this.data) {
 			throw new Error("Data not initialized");
@@ -177,7 +177,7 @@ class OpfsFileDataProvider
 			path = `${currentData.parent?.path}/${newFolderName}`;
 		}
 		const newDir = dir(path);
-		if (await newDir.exists()) {
+		if ((await newDir.exists()) || (await file(path).exists())) {
 			alert("Folder already exists");
 			return;
 		}
@@ -218,7 +218,7 @@ class OpfsFileDataProvider
 		currentFocusedIndex,
 		newFileName,
 	}: { currentFocusedIndex?: TreeItemIndex; newFileName: string }) {
-		const { file, write } = await import("opfs-tools");
+		const { file, write, dir } = await import("opfs-tools");
 
 		if (!this.data) {
 			throw new Error("Data not initialized");
@@ -238,7 +238,7 @@ class OpfsFileDataProvider
 			filePath = `${currentData.parent?.path}/${newFileName}`;
 		}
 		const newFile = file(filePath);
-		if (await newFile.exists()) {
+		if ((await newFile.exists()) || (await dir(filePath).exists())) {
 			alert("File already exists");
 			return;
 		}
