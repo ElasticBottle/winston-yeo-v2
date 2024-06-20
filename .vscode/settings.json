@@ -16,5 +16,6 @@
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": "never",
 		"source.organizeImports.biome": "explicit"
-	}
+	},
+	"cSpell.words": ["opfs", "yanta"]
 }
