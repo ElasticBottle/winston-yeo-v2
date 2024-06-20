@@ -11,7 +11,9 @@ import {
 	type TreeItemIndex,
 	UncontrolledTreeEnvironment,
 } from "react-complex-tree";
+
 import "react-complex-tree/lib/style-modern.css";
+import "./file-explorer-override.css";
 
 const NOTE_BASE_DIR = "yanta-notes";
 
