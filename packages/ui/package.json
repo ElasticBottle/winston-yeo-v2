@@ -14,7 +14,7 @@
 		"format": "bunx @biomejs/biome format .",
 		"lint": "bunx @biomejs/biome lint .",
 		"typecheck": "tsc --noEmit --emitDeclarationOnly false",
-		"ui-add": "pnpm dlx shadcn-ui add && @biomejs/biome format --write"
+		"ui-add": "pnpm dlx shadcn-ui add && bunx @biomejs/biome format --write"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.6.0",
@@ -27,6 +27,7 @@
 		"lucide-react": "^0.395.0",
 		"next-themes": "^0.3.0",
 		"react-hook-form": "^7.52.0",
+		"react-resizable-panels": "^2.0.19",
 		"sonner": "^1.5.0",
 		"tailwind-merge": "^2.3.0"
 	},
