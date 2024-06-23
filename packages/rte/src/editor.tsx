@@ -5,17 +5,24 @@ import { LinkNode } from "@lexical/link";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { TRANSFORMERS } from "@lexical/markdown";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
+import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
 import type { InitialConfigType } from "@lexical/react/LexicalComposer";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { useState } from "react";
+import { Button } from "@winston/ui/button";
+import { CLEAR_EDITOR_COMMAND } from "lexical";
+import { useCallback, useEffect, useState } from "react";
+import { useSaveState } from "./editor.atoms";
+import type { FileType } from "./file-explorer";
 import { SpeechRecognitionShortcutPlugin } from "./speech-recognition-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
@@ -62,7 +69,111 @@ const onError: InitialConfigType["onError"] = function onError(error) {
 	console.error(error);
 };
 
-export function Editor() {
+export function SaveDocumentButton({ targetFile }: { targetFile?: FileType }) {
+	const [saveState, setSaveState] = useSaveState();
+
+	const { saveEditorToFile } = useSaveEditorToFile();
+	const onClickSave = async () => {
+		setSaveState("saving");
+		await saveEditorToFile({
+			targetFile,
+		});
+		setSaveState("saved");
+	};
+
+	return (
+		<Button
+			disabled={saveState !== "unsaved"}
+			variant={"secondary"}
+			onClick={onClickSave}
+		>
+			{saveState}
+		</Button>
+	);
+}
+
+export const useSaveEditorToFile = () => {
+	const [editor] = useLexicalComposerContext();
+	const saveEditorToFile = useCallback(
+		async ({ targetFile }: { targetFile?: FileType }) => {
+			const editorState = editor.getEditorState();
+			const serializedEditorState = editorState.toJSON();
+
+			console.log("serializedEditorState", serializedEditorState);
+			if (targetFile) {
+				// potentially throw Error('Other writer have not been closed');
+				const writer = await targetFile.createWriter();
+				await writer.truncate(0);
+				await writer.write(JSON.stringify(serializedEditorState));
+				await writer.close();
+			}
+		},
+		[editor],
+	);
+	return { saveEditorToFile };
+};
+
+export function AlertUnsavedStatePlugin() {
+	const [, setSaveState] = useSaveState();
+
+	return (
+		<OnChangePlugin
+			onChange={() => {
+				setSaveState("unsaved");
+			}}
+		/>
+	);
+}
+
+export function AutoSaveToFilePlugin({
+	targetFile,
+	autoSaveInterval = 5_000,
+}: { targetFile?: FileType; autoSaveInterval?: number }) {
+	const { saveEditorToFile } = useSaveEditorToFile();
+	const [saveState, setSaveState] = useSaveState();
+
+	useEffect(() => {
+		const onAutoSave = async () => {
+			if (saveState !== "unsaved") {
+				return;
+			}
+			console.log("saving editor state...");
+			await saveEditorToFile({
+				targetFile,
+			});
+			setSaveState("auto-saved");
+		};
+		const interval = setInterval(onAutoSave, autoSaveInterval);
+		return () => clearInterval(interval);
+	}, [autoSaveInterval, saveState, setSaveState, saveEditorToFile, targetFile]);
+
+	return null;
+}
+
+export function AutoLoadFromFilePlugin({
+	sourceFile,
+}: { sourceFile?: FileType }) {
+	const [editor] = useLexicalComposerContext();
+	const [, setSaveState] = useSaveState();
+
+	useEffect(() => {
+		sourceFile?.text().then((text) => {
+			try {
+				console.log("text", text);
+				const state = editor.parseEditorState(text);
+				editor.setEditorState(state);
+				setSaveState("saved");
+			} catch (_) {
+				// If the file is not a valid JSON, we don't want to load it
+				editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+			}
+		});
+	}, [editor, sourceFile, setSaveState]);
+
+	return null;
+}
+
+export function Editor({ sourceFile }: { sourceFile?: FileType }) {
 	const initialConfig: InitialConfigType = {
 		namespace: "RTE",
 		theme: themeClass,
@@ -84,10 +195,13 @@ export function Editor() {
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
 			<div className="flex flex-col gap-3">
-				<SpeechRecognitionShortcutPlugin
-					setHeardWords={setRecentlyHeard}
-					setShortcutAction={setMostRecentAction}
-				/>
+				<div className="flex gap-2 justify-between">
+					<SpeechRecognitionShortcutPlugin
+						setHeardWords={setRecentlyHeard}
+						setShortcutAction={setMostRecentAction}
+					/>
+					<SaveDocumentButton />
+				</div>
 
 				<div className="relative">
 					<RichTextPlugin
@@ -104,7 +218,11 @@ export function Editor() {
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
 					<ListPlugin />
 					<HistoryPlugin />
-					<AutoFocusPlugin />
+					<AutoSaveToFilePlugin targetFile={sourceFile} />
+					<AutoLoadFromFilePlugin sourceFile={sourceFile} />
+					<AutoFocusPlugin defaultSelection="rootEnd" />
+					<AlertUnsavedStatePlugin />
+					<ClearEditorPlugin />
 				</div>
 				<div>
 					<span className="text-muted-foreground">Last heard words: </span>{" "}
