@@ -11,6 +11,17 @@ import { FileExplorer, type FileType } from "./file-explorer";
 export function TextEditor() {
 	const [sourceFile, setSourceFile] = useState<FileType | undefined>(undefined);
 
+	let EditorBody = (
+		<div className="w-full flex justify-center items-center h-full">
+			<div className="text-muted-foreground text-sm ">
+				Select or create a file to get started
+			</div>
+		</div>
+	);
+	if (sourceFile) {
+		EditorBody = <Editor sourceFile={sourceFile} />;
+	}
+
 	return (
 		<ResizablePanelGroup direction="horizontal" className="min-h-screen">
 			<ResizablePanel defaultSize={20}>
@@ -18,7 +29,7 @@ export function TextEditor() {
 			</ResizablePanel>
 			<ResizableHandle />
 			<ResizablePanel defaultSize={80} className="p-5">
-				<Editor sourceFile={sourceFile} />
+				{EditorBody}
 			</ResizablePanel>
 		</ResizablePanelGroup>
 	);

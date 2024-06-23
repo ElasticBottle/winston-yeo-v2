@@ -15,7 +15,6 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { CLEAR_EDITOR_COMMAND, type SerializedEditorState } from "lexical";
@@ -66,31 +65,38 @@ const themeClass: InitialConfigType["theme"] = {
 const onError: InitialConfigType["onError"] = function onError(error) {
 	console.error(error);
 };
-export function EditorAutoSaveToFilePlugin({
-	sourceFile,
-}: { sourceFile?: FileType }) {
+
+export function AutoSaveToFilePlugin({
+	targetFile,
+	autoSaveInterval = 5_000,
+}: { targetFile?: FileType; autoSaveInterval?: number }) {
+	const [editor] = useLexicalComposerContext();
 	const onChange = useCallback(
 		async (serializedEditorState: SerializedEditorState) => {
 			console.log("serializedEditorState", serializedEditorState);
-			if (sourceFile?.path) {
-				const writer = await sourceFile.createWriter();
+			if (targetFile?.path) {
+				const writer = await targetFile.createWriter();
 				await writer.truncate(0);
 				await writer.write(JSON.stringify(serializedEditorState));
 				await writer.close();
 			}
 		},
-		[sourceFile],
+		[targetFile],
 	);
-	return (
-		<OnChangePlugin
-			onChange={(editorState) => {
-				onChange(editorState.toJSON());
-			}}
-		/>
-	);
+
+	useEffect(() => {
+		const onAutoSave = async () => {
+			console.log("saving editor state...");
+			const editorState = editor.getEditorState();
+			await onChange(editorState.toJSON());
+		};
+		const interval = setInterval(onAutoSave, autoSaveInterval);
+		return () => clearInterval(interval);
+	}, [onChange, editor, autoSaveInterval]);
+	return null;
 }
 
-export function EditorAutoLoadFromFilePlugin({
+export function AutoLoadFromFilePlugin({
 	sourceFile,
 }: { sourceFile?: FileType }) {
 	const [editor] = useLexicalComposerContext();
@@ -153,8 +159,8 @@ export function Editor({ sourceFile }: { sourceFile?: FileType }) {
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
 					<ListPlugin />
 					<HistoryPlugin />
-					<EditorAutoSaveToFilePlugin sourceFile={sourceFile} />
-					<EditorAutoLoadFromFilePlugin sourceFile={sourceFile} />
+					<AutoSaveToFilePlugin targetFile={sourceFile} />
+					<AutoLoadFromFilePlugin sourceFile={sourceFile} />
 					<AutoFocusPlugin defaultSelection="rootEnd" />
 					<ClearEditorPlugin />
 				</div>
