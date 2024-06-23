@@ -15,10 +15,13 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { CLEAR_EDITOR_COMMAND, type SerializedEditorState } from "lexical";
+import { Button } from "@winston/ui/button";
+import { CLEAR_EDITOR_COMMAND } from "lexical";
 import { useCallback, useEffect, useState } from "react";
+import { useSaveState } from "./editor.atoms";
 import type { FileType } from "./file-explorer";
 import { SpeechRecognitionShortcutPlugin } from "./speech-recognition-recorder";
 
@@ -66,33 +69,84 @@ const onError: InitialConfigType["onError"] = function onError(error) {
 	console.error(error);
 };
 
-export function AutoSaveToFilePlugin({
-	targetFile,
-	autoSaveInterval = 5_000,
-}: { targetFile?: FileType; autoSaveInterval?: number }) {
+export function SaveDocumentButton({ targetFile }: { targetFile?: FileType }) {
+	const [saveState, setSaveState] = useSaveState();
+
+	const { saveEditorToFile } = useSaveEditorToFile();
+	const onClickSave = async () => {
+		setSaveState("saving");
+		await saveEditorToFile({
+			targetFile,
+		});
+		setSaveState("saved");
+	};
+
+	return (
+		<Button
+			disabled={saveState !== "unsaved"}
+			variant={"secondary"}
+			onClick={onClickSave}
+		>
+			{saveState}
+		</Button>
+	);
+}
+
+export const useSaveEditorToFile = () => {
 	const [editor] = useLexicalComposerContext();
-	const onChange = useCallback(
-		async (serializedEditorState: SerializedEditorState) => {
+	const saveEditorToFile = useCallback(
+		async ({ targetFile }: { targetFile?: FileType }) => {
+			const editorState = editor.getEditorState();
+			const serializedEditorState = editorState.toJSON();
+
 			console.log("serializedEditorState", serializedEditorState);
-			if (targetFile?.path) {
+			if (targetFile) {
+				// potentially throw Error('Other writer have not been closed');
 				const writer = await targetFile.createWriter();
 				await writer.truncate(0);
 				await writer.write(JSON.stringify(serializedEditorState));
 				await writer.close();
 			}
 		},
-		[targetFile],
+		[editor],
 	);
+	return { saveEditorToFile };
+};
+
+export function AlertUnsavedStatePlugin() {
+	const [, setSaveState] = useSaveState();
+
+	return (
+		<OnChangePlugin
+			onChange={() => {
+				setSaveState("unsaved");
+			}}
+		/>
+	);
+}
+
+export function AutoSaveToFilePlugin({
+	targetFile,
+	autoSaveInterval = 5_000,
+}: { targetFile?: FileType; autoSaveInterval?: number }) {
+	const { saveEditorToFile } = useSaveEditorToFile();
+	const [saveState, setSaveState] = useSaveState();
 
 	useEffect(() => {
 		const onAutoSave = async () => {
+			if (saveState !== "unsaved") {
+				return;
+			}
 			console.log("saving editor state...");
-			const editorState = editor.getEditorState();
-			await onChange(editorState.toJSON());
+			await saveEditorToFile({
+				targetFile,
+			});
+			setSaveState("auto-saved");
 		};
 		const interval = setInterval(onAutoSave, autoSaveInterval);
 		return () => clearInterval(interval);
-	}, [onChange, editor, autoSaveInterval]);
+	}, [autoSaveInterval, saveState, setSaveState, saveEditorToFile, targetFile]);
+
 	return null;
 }
 
@@ -100,6 +154,7 @@ export function AutoLoadFromFilePlugin({
 	sourceFile,
 }: { sourceFile?: FileType }) {
 	const [editor] = useLexicalComposerContext();
+	const [, setSaveState] = useSaveState();
 
 	useEffect(() => {
 		sourceFile?.text().then((text) => {
@@ -107,12 +162,13 @@ export function AutoLoadFromFilePlugin({
 				console.log("text", text);
 				const state = editor.parseEditorState(text);
 				editor.setEditorState(state);
+				setSaveState("saved");
 			} catch (_) {
 				// If the file is not a valid JSON, we don't want to load it
 				editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
 			}
 		});
-	}, [editor, sourceFile]);
+	}, [editor, sourceFile, setSaveState]);
 
 	return null;
 }
@@ -139,10 +195,13 @@ export function Editor({ sourceFile }: { sourceFile?: FileType }) {
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
 			<div className="flex flex-col gap-3">
-				<SpeechRecognitionShortcutPlugin
-					setHeardWords={setRecentlyHeard}
-					setShortcutAction={setMostRecentAction}
-				/>
+				<div className="flex gap-2 justify-between">
+					<SpeechRecognitionShortcutPlugin
+						setHeardWords={setRecentlyHeard}
+						setShortcutAction={setMostRecentAction}
+					/>
+					<SaveDocumentButton />
+				</div>
 
 				<div className="relative">
 					<RichTextPlugin
@@ -162,6 +221,7 @@ export function Editor({ sourceFile }: { sourceFile?: FileType }) {
 					<AutoSaveToFilePlugin targetFile={sourceFile} />
 					<AutoLoadFromFilePlugin sourceFile={sourceFile} />
 					<AutoFocusPlugin defaultSelection="rootEnd" />
+					<AlertUnsavedStatePlugin />
 					<ClearEditorPlugin />
 				</div>
 				<div>
