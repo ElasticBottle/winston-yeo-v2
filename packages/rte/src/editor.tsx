@@ -5,17 +5,22 @@ import { LinkNode } from "@lexical/link";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { TRANSFORMERS } from "@lexical/markdown";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
+import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
 import type { InitialConfigType } from "@lexical/react/LexicalComposer";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { useState } from "react";
+import { CLEAR_EDITOR_COMMAND, type SerializedEditorState } from "lexical";
+import { useCallback, useEffect, useState } from "react";
+import type { FileType } from "./file-explorer";
 import { SpeechRecognitionShortcutPlugin } from "./speech-recognition-recorder";
 
 const themeClass: InitialConfigType["theme"] = {
@@ -61,8 +66,52 @@ const themeClass: InitialConfigType["theme"] = {
 const onError: InitialConfigType["onError"] = function onError(error) {
 	console.error(error);
 };
+export function EditorAutoSaveToFilePlugin({
+	sourceFile,
+}: { sourceFile?: FileType }) {
+	const onChange = useCallback(
+		async (serializedEditorState: SerializedEditorState) => {
+			console.log("serializedEditorState", serializedEditorState);
+			if (sourceFile?.path) {
+				const writer = await sourceFile.createWriter();
+				await writer.truncate(0);
+				await writer.write(JSON.stringify(serializedEditorState));
+				await writer.close();
+			}
+		},
+		[sourceFile],
+	);
+	return (
+		<OnChangePlugin
+			onChange={(editorState) => {
+				onChange(editorState.toJSON());
+			}}
+		/>
+	);
+}
 
-export function Editor() {
+export function EditorAutoLoadFromFilePlugin({
+	sourceFile,
+}: { sourceFile?: FileType }) {
+	const [editor] = useLexicalComposerContext();
+
+	useEffect(() => {
+		sourceFile?.text().then((text) => {
+			try {
+				console.log("text", text);
+				const state = editor.parseEditorState(text);
+				editor.setEditorState(state);
+			} catch (_) {
+				// If the file is not a valid JSON, we don't want to load it
+				editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+			}
+		});
+	}, [editor, sourceFile]);
+
+	return null;
+}
+
+export function Editor({ sourceFile }: { sourceFile?: FileType }) {
 	const initialConfig: InitialConfigType = {
 		namespace: "RTE",
 		theme: themeClass,
@@ -104,7 +153,10 @@ export function Editor() {
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
 					<ListPlugin />
 					<HistoryPlugin />
+					<EditorAutoSaveToFilePlugin sourceFile={sourceFile} />
+					<EditorAutoLoadFromFilePlugin sourceFile={sourceFile} />
 					<AutoFocusPlugin defaultSelection="rootEnd" />
+					<ClearEditorPlugin />
 				</div>
 				<div>
 					<span className="text-muted-foreground">Last heard words: </span>{" "}

@@ -22,7 +22,7 @@
     --rct-arrow-container-size: 16px;
     --rct-arrow-padding: 6px;
   
-    --rct-cursor: pointer;
+    --rct-cursor: auto;
   
     --rct-search-width: 160px;
     --rct-search-height: 1rem;

@@ -14,12 +14,13 @@ import {
 
 import "react-complex-tree/lib/style-modern.css";
 import "./file-explorer-override.css";
-import { FilePlus, Folder, FolderOpen, FolderPlus } from "lucide-react";
+import { cn } from "@winston/ui";
+import { File, FilePlus, Folder, FolderOpen, FolderPlus } from "lucide-react";
 
 const NOTE_BASE_DIR = "yanta-notes";
 
-type DirectoryType = ReturnType<typeof dir>;
-type FileType = ReturnType<typeof file>;
+export type DirectoryType = ReturnType<typeof dir>;
+export type FileType = ReturnType<typeof file>;
 
 const initializeNoteDir = async () => {
 	const { dir } = await import("opfs-tools");
@@ -82,8 +83,8 @@ class OpfsFileDataProvider
 		if (this.state === "initialized") {
 			return;
 		}
-		this.state = "initialized";
 		this.data = await getFileTree(await initializeNoteDir());
+		this.state = "initialized";
 	}
 
 	async getTreeItem(itemId: TreeItemIndex) {
@@ -268,7 +269,11 @@ class OpfsFileDataProvider
 	}
 }
 
-export function FileExplorer() {
+export function FileExplorer({
+	setSourceFile,
+}: {
+	setSourceFile?: (sourceFile: FileType | undefined) => void;
+}) {
 	const environment = useRef<TreeEnvironmentRef<
 		FileType | DirectoryType
 	> | null>(null);
@@ -281,18 +286,36 @@ export function FileExplorer() {
 			ref={environment}
 			canDragAndDrop
 			canDropOnFolder
+			onPrimaryAction={(item) => {
+				if (item.data.kind === "file") {
+					setSourceFile?.(item.data);
+				}
+			}}
 			dataProvider={dataProvider}
 			getItemTitle={(item) => item.data.name}
 			viewState={{}}
-			renderItemArrow={(item) => {
+			renderItemArrow={({ item, context }) => {
 				let body: JSX.Element | null = null;
-				if (item.item.isFolder && item.context.isExpanded) {
+				if (item.isFolder && context.isExpanded) {
 					body = <FolderOpen />;
-				} else if (item.item.isFolder) {
+				} else if (item.isFolder) {
 					body = <Folder />;
+				} else {
+					body = <File />;
 				}
 				return (
-					<div className="z-10 h-4 w-4 flex justify-center rounded-md -mr-3 items-center cursor-pointer pointer-events-none">
+					<div
+						className={cn(
+							"z-10 h-4 w-4 flex justify-center rounded-md -mr-3 items-center",
+							item.isFolder && "cursor-pointer",
+						)}
+						{...context.arrowProps}
+						onClick={() => {
+							if (item.isFolder) {
+								context.toggleExpandedState();
+							}
+						}}
+					>
 						{body}
 					</div>
 				);
@@ -338,7 +361,11 @@ export function FileExplorer() {
 					<FilePlus size={18} />
 				</Button>
 			</div>
-			<Tree treeId={treeId} rootItem={NOTE_BASE_DIR} treeLabel="Tree Example" />
+			<Tree
+				treeId={treeId}
+				rootItem={NOTE_BASE_DIR}
+				treeLabel="File explorer"
+			/>
 		</UncontrolledTreeEnvironment>
 	);
 }
