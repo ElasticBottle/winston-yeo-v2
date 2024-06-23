@@ -15,7 +15,7 @@ import {
 import "react-complex-tree/lib/style-modern.css";
 import "./file-explorer-override.css";
 import { cn } from "@winston/ui";
-import { File, FilePlus, Folder, FolderOpen, FolderPlus } from "lucide-react";
+import { File, FilePlus, Folder, FolderOpen, FolderPlus } from "@winston/ui";
 
 const NOTE_BASE_DIR = "yanta-notes";
 

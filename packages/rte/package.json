@@ -32,7 +32,6 @@
 		"@winston/ui": "workspace:*",
 		"jotai": "^2.8.3",
 		"lexical": "^0.16.0",
-		"lucide-react": "^0.395.0",
 		"opfs-tools": "^0.5.2",
 		"react-complex-tree": "^2.4.4"
 	}
