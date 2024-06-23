@@ -27,7 +27,7 @@ export function TextEditor() {
 			<ResizablePanel defaultSize={20}>
 				<FileExplorer setSourceFile={setSourceFile} />
 			</ResizablePanel>
-			<ResizableHandle />
+			<ResizableHandle withHandle />
 			<ResizablePanel defaultSize={80} className="p-5">
 				{EditorBody}
 			</ResizablePanel>
