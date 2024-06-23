@@ -14,7 +14,7 @@ import {
 
 import "react-complex-tree/lib/style-modern.css";
 import "./file-explorer-override.css";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { FilePlus, Folder, FolderOpen, FolderPlus } from "lucide-react";
 
 const NOTE_BASE_DIR = "yanta-notes";
 
@@ -73,13 +73,22 @@ const getFileTree = async (
 class OpfsFileDataProvider
 	implements TreeDataProvider<DirectoryType | FileType>
 {
-	data: Record<string, TreeItem<FileType | DirectoryType>> | undefined;
+	state: "not-initialized" | "initialized" | "stale" = "not-initialized";
+	data: Record<string, TreeItem<FileType | DirectoryType>> = {};
 	treeChangeListeners: Array<(changedItemIds: Array<TreeItemIndex>) => void> =
 		[];
 
+	async initialize() {
+		if (this.state === "initialized") {
+			return;
+		}
+		this.state = "initialized";
+		this.data = await getFileTree(await initializeNoteDir());
+	}
+
 	async getTreeItem(itemId: TreeItemIndex) {
-		if (!this.data) {
-			this.data = await getFileTree(await initializeNoteDir());
+		if (this.state !== "initialized") {
+			await this.initialize();
 		}
 		const result = this.data[itemId];
 		if (!result) {
@@ -89,8 +98,8 @@ class OpfsFileDataProvider
 	}
 
 	async getTreeItems(itemIds: Array<TreeItemIndex>) {
-		if (!this.data) {
-			this.data = await getFileTree(await initializeNoteDir());
+		if (this.state !== "initialized") {
+			await this.initialize();
 		}
 		return itemIds.map((itemId) => {
 			const result = this.data?.[itemId];
@@ -135,10 +144,6 @@ class OpfsFileDataProvider
 	) {
 		const { dir, file } = await import("opfs-tools");
 
-		if (!this.data) {
-			throw new Error("Data not initialized");
-		}
-
 		const data = item.data;
 		if (data.kind === "dir") {
 			item.data = await data.moveTo(dir(`${data.parent?.path}/${newName}`));
@@ -147,8 +152,7 @@ class OpfsFileDataProvider
 		}
 		item.index = newName;
 
-		const newData = await getFileTree(await initializeNoteDir());
-		this.data = newData;
+		this.state = "stale";
 	}
 
 	/**
@@ -161,10 +165,6 @@ class OpfsFileDataProvider
 		newFolderName,
 	}: { currentFocusedIndex?: TreeItemIndex; newFolderName: string }) {
 		const { dir, file } = await import("opfs-tools");
-
-		if (!this.data) {
-			throw new Error("Data not initialized");
-		}
 
 		const currentFocusedItem = this.data[currentFocusedIndex ?? NOTE_BASE_DIR];
 		if (!currentFocusedItem) {
@@ -197,9 +197,7 @@ class OpfsFileDataProvider
 			if (!currentData.parent) {
 				throw new Error("Parent not found");
 			}
-			console.log("currentData.parent.name", currentData.parent.name);
 			const parentItem = this.data[currentData.parent.name];
-			console.log("parentItem", parentItem);
 			parentItem?.children?.push(newFolderName);
 		} else if (currentData.kind === "dir") {
 			currentFocusedItem.children?.push(newFolderName);
@@ -289,9 +287,9 @@ export function FileExplorer() {
 			renderItemArrow={(item) => {
 				let body: JSX.Element | null = null;
 				if (item.item.isFolder && item.context.isExpanded) {
-					body = <ChevronDown />;
+					body = <FolderOpen />;
 				} else if (item.item.isFolder) {
-					body = <ChevronRight />;
+					body = <Folder />;
 				}
 				return (
 					<div className="z-10 h-4 w-4 flex justify-center rounded-md -mr-3 items-center cursor-pointer pointer-events-none">
@@ -302,6 +300,9 @@ export function FileExplorer() {
 		>
 			<div className="flex w-full gap-2">
 				<Button
+					variant={"ghost"}
+					size={"icon-sm"}
+					aria-label="create new folder"
 					onClick={async () => {
 						const folderName = prompt("Enter folder name");
 						if (!folderName) {
@@ -314,9 +315,12 @@ export function FileExplorer() {
 						});
 					}}
 				>
-					New Folder
+					<FolderPlus size={18} />
 				</Button>
 				<Button
+					variant={"ghost"}
+					size={"icon-sm"}
+					aria-label="create new file"
 					onClick={async () => {
 						const fileName = prompt("Enter folder name");
 						console.log("fileName", fileName);
@@ -331,7 +335,7 @@ export function FileExplorer() {
 						});
 					}}
 				>
-					New File
+					<FilePlus size={18} />
 				</Button>
 			</div>
 			<Tree treeId={treeId} rootItem={NOTE_BASE_DIR} treeLabel="Tree Example" />
