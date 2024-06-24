@@ -17,6 +17,7 @@ import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { Button } from "@winston/ui/button";
 import { CLEAR_EDITOR_COMMAND } from "lexical";
@@ -39,7 +40,7 @@ const themeClass: InitialConfigType["theme"] = {
 	list: {
 		listitem: "ps-2",
 		nested: {
-			listitem: "editor-nested-listitem",
+			listitem: "list-none",
 		},
 		ol: "list-decimal py-5 ps-6",
 		ul: "list-disc py-5 ps-6",
@@ -217,6 +218,7 @@ export function Editor({ sourceFile }: { sourceFile?: FileType }) {
 					/>
 					<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
 					<ListPlugin />
+					<TabIndentationPlugin />
 					<HistoryPlugin />
 					<AutoSaveToFilePlugin targetFile={sourceFile} />
 					<AutoLoadFromFilePlugin sourceFile={sourceFile} />
