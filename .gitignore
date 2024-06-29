@@ -49,3 +49,6 @@ dist/
 
 # turbo
 .turbo
+
+# cloudflare 
+.wrangler/

@@ -120,6 +120,12 @@ importers:
       '@winston/validators':
         specifier: workspace:*
         version: link:../../packages/validators
+      grammy:
+        specifier: ^1.25.2
+        version: 1.25.2
+      hono:
+        specifier: ^4.4.9
+        version: 4.4.9
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -218,10 +224,10 @@ importers:
         version: 0.9.0
       drizzle-orm:
         specifier: ^0.31.2
-        version: 0.31.2(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1)
+        version: 0.31.2(@cloudflare/workers-types@4.20240620.0)(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1)
       drizzle-zod:
         specifier: ^0.5.1
-        version: 0.5.1(drizzle-orm@0.31.2(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1))(zod@3.23.8)
+        version: 0.5.1(drizzle-orm@0.31.2(@cloudflare/workers-types@4.20240620.0)(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1))(zod@3.23.8)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -500,6 +506,9 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@cloudflare/workers-types@4.20240620.0':
+    resolution: {integrity: sha512-CQD8YS6evRob7LChvIX3gE3zYo0KVgaLDOu1SwNP1BVIS2Sa0b+FC8S1e1hhrNN8/E4chYlVN+FDAgA4KRDUEQ==}
 
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
@@ -810,6 +819,9 @@ packages:
 
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
+
+  '@grammyjs/types@3.9.0':
+    resolution: {integrity: sha512-QzZAbz5COBZnDlDs6x94TIIIH5Pi7AMk0rJPM2O5JAz5Q+s7Xxp3lGg/pWyiVR9Q8euRDYCJmDtcRjwwFD6a3g==}
 
   '@hookform/resolvers@3.6.0':
     resolution: {integrity: sha512-UBcpyOX3+RR+dNnqBd0lchXpoL8p4xC21XP8H6Meb8uve5Br1GCnmg0PcBoKKqPKgGu9GHQ/oygcmPrQhetwqw==}
@@ -1426,6 +1438,10 @@ packages:
     resolution: {integrity: sha512-WiI2g3+ce2g1u1gP41MoDj2DsMuQQ+us7vHobysRixKECGaLHpfTI7DuVZmHU087ozRAGr3GocSyqmWLLo+fig==}
     engines: {node: '>=14.6'}
 
+  abort-controller@3.0.0:
+    resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
+    engines: {node: '>=6.5'}
+
   acorn-walk@8.3.2:
     resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
     engines: {node: '>=0.4.0'}
@@ -1914,6 +1930,10 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
+  event-target-shim@5.0.1:
+    resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
+    engines: {node: '>=6'}
+
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
@@ -2021,6 +2041,10 @@ packages:
     resolution: {integrity: sha512-rEDCuqUQ4tbD78TpzsMtt5OIf0cBCSDWSJtUDaF6JsAh+k0v9r++NzxNEG87oDZx9ZwGhD8DaezR2L/yrw0Jdw==}
     engines: {node: '>=10'}
 
+  grammy@1.25.2:
+    resolution: {integrity: sha512-i1NCr2B8d5/hEHbIzqwG/1+JmIY63xVcBPCyciJB88BYKlXKsM42v5dfRVGf7AYyPxL07Em0qk42Z6YJIqR3HQ==}
+    engines: {node: ^12.20.0 || >=14.13.1}
+
   handlebars@4.7.8:
     resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
     engines: {node: '>=0.4.7'}
@@ -2040,6 +2064,10 @@ packages:
 
   header-case@1.0.1:
     resolution: {integrity: sha512-i0q9mkOeSuhXw6bGgiQCCBgY/jlZuV/7dZXyZ9c6LcBrqwvT8eT719E9uxE5LiZftdl+z81Ugbg/VvXV4OJOeQ==}
+
+  hono@4.4.9:
+    resolution: {integrity: sha512-VW1hnYipHL/XsnSYiCTLJ+Z7iisZYWwSOiKXm9RBV2NKPxNqjfaHqeMFiDl11fK893ofmErvRpX20+FTNjZIjA==}
+    engines: {node: '>=16.0.0'}
 
   http-proxy-agent@7.0.2:
     resolution: {integrity: sha512-T1gkAiYYDWYx3V5Bmyu7HcfcvL7mUrTWiM6yOfa3PIphViJ/gFPbvidQ+veqSOHci/PxBcDabeUNCzpOODJZig==}
@@ -2392,6 +2420,15 @@ packages:
 
   no-case@2.3.2:
     resolution: {integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==}
+
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
 
   node-gyp-build@4.8.1:
     resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
@@ -2966,6 +3003,9 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
+  tr46@0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+
   triple-beam@1.4.1:
     resolution: {integrity: sha512-aZbgViZrg1QNcG+LULa7nhZpJTZSLm/mXnHXnbAbjmN5aSa0y7V+wvv6+4WaBtpISJzThKy+PIPxc1Nq1EJ9mg==}
     engines: {node: '>= 14.0.0'}
@@ -3100,6 +3140,12 @@ packages:
 
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
+
+  webidl-conversions@3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+
+  whatwg-url@5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -3242,6 +3288,9 @@ snapshots:
     optional: true
 
   '@biomejs/cli-win32-x64@1.8.3':
+    optional: true
+
+  '@cloudflare/workers-types@4.20240620.0':
     optional: true
 
   '@colors/colors@1.6.0': {}
@@ -3442,6 +3491,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.2': {}
+
+  '@grammyjs/types@3.9.0': {}
 
   '@hookform/resolvers@3.6.0(react-hook-form@7.52.0(react@18.3.1))':
     dependencies:
@@ -4109,6 +4160,10 @@ snapshots:
       utf-8-validate: 6.0.4
       ws: 8.17.1(bufferutil@4.0.8)(utf-8-validate@6.0.4)
 
+  abort-controller@3.0.0:
+    dependencies:
+      event-target-shim: 5.0.1
+
   acorn-walk@8.3.2: {}
 
   acorn@8.11.3: {}
@@ -4448,8 +4503,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.31.2(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1):
+  drizzle-orm@0.31.2(@cloudflare/workers-types@4.20240620.0)(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1):
     optionalDependencies:
+      '@cloudflare/workers-types': 4.20240620.0
       '@neondatabase/serverless': 0.9.3
       '@opentelemetry/api': 1.8.0
       '@types/pg': 8.11.6
@@ -4457,9 +4513,9 @@ snapshots:
       '@vercel/postgres': 0.9.0
       react: 18.3.1
 
-  drizzle-zod@0.5.1(drizzle-orm@0.31.2(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1))(zod@3.23.8):
+  drizzle-zod@0.5.1(drizzle-orm@0.31.2(@cloudflare/workers-types@4.20240620.0)(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1))(zod@3.23.8):
     dependencies:
-      drizzle-orm: 0.31.2(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1)
+      drizzle-orm: 0.31.2(@cloudflare/workers-types@4.20240620.0)(@neondatabase/serverless@0.9.3)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(@types/react@18.3.3)(@vercel/postgres@0.9.0)(react@18.3.1)
       zod: 3.23.8
 
   eastasianwidth@0.2.0: {}
@@ -4551,6 +4607,8 @@ snapshots:
   estraverse@5.3.0: {}
 
   esutils@2.0.3: {}
+
+  event-target-shim@5.0.1: {}
 
   execa@5.1.1:
     dependencies:
@@ -4688,6 +4746,16 @@ snapshots:
       chalk: 4.1.2
       tinygradient: 1.1.5
 
+  grammy@1.25.2:
+    dependencies:
+      '@grammyjs/types': 3.9.0
+      abort-controller: 3.0.0
+      debug: 4.3.4
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   handlebars@4.7.8:
     dependencies:
       minimist: 1.2.8
@@ -4709,6 +4777,8 @@ snapshots:
     dependencies:
       no-case: 2.3.2
       upper-case: 1.1.3
+
+  hono@4.4.9: {}
 
   http-proxy-agent@7.0.2:
     dependencies:
@@ -5025,6 +5095,10 @@ snapshots:
   no-case@2.3.2:
     dependencies:
       lower-case: 1.1.4
+
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
 
   node-gyp-build@4.8.1: {}
 
@@ -5607,6 +5681,8 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
+  tr46@0.0.3: {}
+
   triple-beam@1.4.1: {}
 
   ts-interface-checker@0.1.13: {}
@@ -5718,6 +5794,13 @@ snapshots:
   wcwidth@1.0.1:
     dependencies:
       defaults: 1.0.4
+
+  webidl-conversions@3.0.1: {}
+
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
 
   which@2.0.2:
     dependencies:

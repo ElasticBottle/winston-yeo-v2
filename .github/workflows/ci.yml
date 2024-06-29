@@ -26,11 +26,7 @@ jobs:
 
       - name: Setup
         uses: ./tooling/github/setup
-
-      - name: Copy env
-        shell: bash
-        run: cp .env.example .env
-
+        
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:

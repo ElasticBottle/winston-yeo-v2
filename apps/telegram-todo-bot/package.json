@@ -1,0 +1,32 @@
+{
+	"name": "@winston/telegram-bot",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "bun build",
+		"clean": "git clean -xdf .turbo node_modules",
+		"dev": "dotenvx run -f ./.env -- bun run --hot src/index.ts",
+		"env:encrypt": "dotenvx encrypt -f ./.env",
+		"env:add": "dotenvx set -f ./.env --",
+		"env:get": "dotenvx get -f ./.env --",
+		"format": "bunx @biomejs/biome format .",
+		"lint": "bunx @biomejs/biome lint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@t3-oss/env-nextjs": "^0.10.1",
+		"@winston/db": "workspace:*",
+		"@winston/validators": "workspace:*",
+		"grammy": "^1.25.2",
+		"hono": "^4.4.9",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@types/node": "^20.14.9",
+		"@winston/biome-config": "workspace:*",
+		"@winston/tsconfig": "workspace:*",
+		"jiti": "^1.21.6",
+		"typescript": "^5.5.2"
+	}
+}
