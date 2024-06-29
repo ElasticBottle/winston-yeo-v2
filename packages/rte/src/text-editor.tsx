@@ -6,7 +6,18 @@ import {
 } from "@winston/ui/resizable";
 import { useState } from "react";
 import { Editor } from "./editor";
-import { FileExplorer, type FileType } from "./file-explorer";
+import type { FileType } from "./file-explorer";
+import dynamic from "next/dynamic";
+
+const FileExplorer = dynamic(
+	() =>
+		import("./file-explorer").then((result) => {
+			return result.FileExplorer;
+		}),
+	{
+		ssr: false,
+	},
+);
 
 export function TextEditor() {
 	const [sourceFile, setSourceFile] = useState<FileType | undefined>(undefined);
