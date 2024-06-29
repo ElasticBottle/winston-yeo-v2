@@ -4,9 +4,9 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "bun build",
-		"clean": "git clean -xdf .turbo node_modules",
-		"dev": "dotenvx run -f ./.env -- bun run --hot src/index.ts",
+		"build": "tsup ./src/index.ts",
+		"clean": "git clean -xdf .turbo node_modules dist",
+		"dev": "dotenvx run -f ./.env -- tsx --watch src/index.ts",
 		"env:encrypt": "dotenvx encrypt -f ./.env",
 		"env:add": "dotenvx set -f ./.env --",
 		"env:get": "dotenvx get -f ./.env --",
@@ -15,6 +15,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@hono/node-server": "^1.11.4",
 		"@t3-oss/env-nextjs": "^0.10.1",
 		"@winston/db": "workspace:*",
 		"@winston/validators": "workspace:*",
@@ -27,6 +28,8 @@
 		"@winston/biome-config": "workspace:*",
 		"@winston/tsconfig": "workspace:*",
 		"jiti": "^1.21.6",
+		"tsup": "^8.1.0",
+		"tsx": "^4.16.0",
 		"typescript": "^5.5.2"
 	}
 }
