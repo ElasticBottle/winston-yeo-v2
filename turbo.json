@@ -1,8 +1,8 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
-	"experimentalUI": true,
+	"ui": "stream",
 	"globalDependencies": ["**/.env"],
-	"pipeline": {
+	"tasks": {
 		"topo": {
 			"dependsOn": ["^topo"]
 		},
@@ -22,7 +22,7 @@
 			"cache": false
 		},
 		"format": {
-			"outputMode": "new-only"
+			"outputLogs": "new-only"
 		},
 		"lint": {
 			"dependsOn": ["^topo", "^build"]
@@ -36,7 +36,26 @@
 		},
 		"//#clean": {
 			"cache": false
+		},
+		"push": {
+			"cache": false,
+			"interactive": true
+		},
+		"studio": {
+			"cache": false,
+			"persistent": true
+		},
+		"ui-add": {
+			"cache": false,
+			"interactive": true
 		}
 	},
-	"globalEnv": []
+	"globalPassThroughEnv": [
+		"NODE_ENV",
+		"CI",
+		"VERCEL",
+		"VERCEL_ENV",
+		"VERCEL_URL",
+		"npm_lifecycle_event"
+	]
 }
