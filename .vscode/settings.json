@@ -17,5 +17,13 @@
 		"source.organizeImports": "never",
 		"source.organizeImports.biome": "explicit"
 	},
-	"cSpell.words": ["lucide", "opfs", "yanta"]
+	"cSpell.words": [
+		"biomejs",
+		"bunx",
+		"dotenvx",
+		"lucide",
+		"opfs",
+		"typecheck",
+		"yanta"
+	]
 }
