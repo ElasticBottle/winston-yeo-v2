@@ -7,11 +7,14 @@
 		"build": "pnpm with-env next build",
 		"clean": "git clean -xdf .next .turbo node_modules",
 		"dev": "pnpm with-env next dev",
+		"env:encrypt": "dotenvx encrypt",
+		"env:add": "dotenvx set",
+		"env:get": "dotenvx get",
 		"format": "bunx @biomejs/biome format .",
 		"lint": "bunx @biomejs/biome lint .",
 		"start": "pnpm with-env next start",
 		"typecheck": "tsc --noEmit",
-		"with-env": "dotenvx run -f ../../.env --"
+		"with-env": "dotenvx run --"
 	},
 	"dependencies": {
 		"@winston/api": "workspace:*",
