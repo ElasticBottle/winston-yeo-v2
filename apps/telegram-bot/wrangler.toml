@@ -11,7 +11,8 @@ dev.port = 8787
 
 [[kv_namespaces]]
 binding = "TODO_DEMO"
-id = "41d1db7cd1cc4860ba343e037eedb5c2"
+id = "7c046a6fc9a94c1db3f1e5cb2b64d813"
+preview_id = "41d1db7cd1cc4860ba343e037eedb5c2"
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"
