@@ -4,10 +4,10 @@ import {
 	ResizablePanel,
 	ResizablePanelGroup,
 } from "@winston/ui/resizable";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Editor } from "./editor";
 import type { FileType } from "./file-explorer";
-import dynamic from "next/dynamic";
 
 const FileExplorer = dynamic(
 	() =>
