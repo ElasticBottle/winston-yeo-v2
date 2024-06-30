@@ -1,9 +1,7 @@
-import { readFileSync } from "node:fs";
 import type { Ai } from "@cloudflare/workers-types/experimental";
 import { type EmojiFlavor, emojiParser } from "@grammyjs/emoji";
-import { type FileFlavor, hydrateFiles } from "@grammyjs/files";
 import { parseDate } from "chrono-node";
-import type { UserFromGetMe } from "grammy/types";
+import type { Message, Update, UserFromGetMe } from "grammy/types";
 import { Bot, type Context, webhookCallback } from "grammy/web";
 import { Hono } from "hono";
 import { envValidator } from "./middleware/env-validator";
@@ -23,46 +21,57 @@ app.post("/", async (c) => {
 		decodeURIComponent(c.env.TELEGRAM_BOT_INFO),
 	);
 
-	type BotContext = FileFlavor<EmojiFlavor<Context>>;
+	type BotContext = EmojiFlavor<Context>;
 
 	const bot = new Bot<BotContext>(c.env.TELEGRAM_BOT_TOKEN, {
 		botInfo,
 	});
 	bot.use(emojiParser());
-	bot.api.config.use(hydrateFiles(bot.token));
 
-	bot.command("start", async (ctx: Context) => {
+	bot.command("start", async (ctx) => {
 		await ctx.reply(
 			"Welcome, I'm a bot that helps you keep track of your tasks and reminds you when things are due!",
 		);
 	});
-	bot.on("message", async (ctx) => {
-		if (ctx.chat.type !== "private") {
-			return ctx.reply(
-				`I only work in private chats for now! Search up ${botInfo.username} to get started`,
-			);
-		}
+
+	const onMessage = async (
+		ctx: BotContext,
+		msg: Message & Update.NonChannel,
+	) => {
 		console.log("ctx.from", ctx.from);
 		console.log("ctx.chat", ctx.chat);
-		console.log("ctx.msg", ctx.msg);
+		console.log("msg", msg);
 
-		let text = ctx.msg.text;
-		if (ctx.msg.voice) {
-			const fileInfo = await ctx.getFile();
-			const path = await fileInfo.download();
-			const file = readFileSync(path);
+		let text = msg.text;
+		if (msg.voice) {
+			if ((msg.voice.file_size ?? 0) > 2e7) {
+				const emojiString = ctx.emoji`I can't process audio files larger than 20MB ${"smiling_face_with_tear"}`;
+				return ctx.reply(emojiString, {
+					reply_parameters: { message_id: msg.message_id },
+				});
+			}
+			const fileInfo = await ctx.api.getFile(msg.voice.file_id);
+			const fileResp = await fetch(
+				`https://api.telegram.org/file/bot${c.env.TELEGRAM_BOT_TOKEN}/${fileInfo.file_path}`,
+			);
+			const file = await fileResp.arrayBuffer();
+
 			const response = await c.env.AI.run("@cf/openai/whisper", {
 				audio: [...new Uint8Array(file)],
 			});
+			console.log("response", response);
 			text = response.text;
 		}
 
 		if (!text) {
 			const emojiString = ctx.emoji`I did not understand your request ${"smiling_face_with_tear"} Try with either text or voice!`;
 			return ctx.reply(emojiString, {
-				reply_parameters: { message_id: ctx.msg.message_id },
+				reply_parameters: { message_id: msg.message_id },
 			});
 		}
+
+		const date = parseDate(text, new Date(), { forwardDate: true });
+		console.log("date", date);
 
 		const response = await c.env.AI.run(
 			"@hf/nousresearch/hermes-2-pro-mistral-7b",
@@ -83,6 +92,12 @@ Give no more than 2 sentence response.`,
 					{
 						role: "user",
 						content: text,
+					},
+					{
+						role: "assistant",
+						content: date
+							? `The user has requested for the given request to happen on ${date.toISOString()}`
+							: "The user has not requested for a specific date to be used.",
 					},
 				],
 				tools: [
@@ -161,9 +176,6 @@ Give no more than 2 sentence response.`,
 			},
 		);
 
-		const date = parseDate(text, new Date(), { forwardDate: true });
-		console.log("date", date);
-
 		if ("response" in response) {
 			console.log("response", response);
 			return await ctx.reply(
@@ -174,13 +186,22 @@ In an ideal world, I would have responded with ${response.response}
 I would also have called the following tools:
 ${response.tool_calls ? formatToolUse(response.tool_calls, date) : ""}`,
 				{
-					reply_parameters: { message_id: ctx.msg.message_id },
+					reply_parameters: { message_id: msg.message_id },
 				},
 			);
 		}
 		return await ctx.reply("I'm sorry, I didn't understand that.", {
-			reply_parameters: { message_id: ctx.msg.message_id },
+			reply_parameters: { message_id: msg.message_id },
 		});
+	};
+
+	bot.on("message", (ctx) => {
+		if (ctx.chat.type !== "private") {
+			return ctx.reply(
+				`I only work in private chats for now! Search up ${botInfo.username} to get started`,
+			);
+		}
+		onMessage(ctx, ctx.message);
 	});
 
 	return await webhookCallback(bot, "hono")(c);

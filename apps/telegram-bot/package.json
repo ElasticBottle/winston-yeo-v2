@@ -18,7 +18,6 @@
 	},
 	"dependencies": {
 		"@grammyjs/emoji": "^1.2.0",
-		"@grammyjs/files": "^1.1.1",
 		"@winston/db": "workspace:*",
 		"@winston/validators": "workspace:*",
 		"chrono-node": "^2.7.6",
