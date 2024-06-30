@@ -49,3 +49,7 @@ dist/
 
 # turbo
 .turbo
+
+# cloudflare 
+.dev.vars
+.wrangler/
