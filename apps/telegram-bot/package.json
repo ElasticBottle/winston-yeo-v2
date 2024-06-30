@@ -13,13 +13,15 @@
 		"env:get": "dotenvx get -f ./.env --",
 		"format": "bunx @biomejs/biome format .",
 		"lint": "bunx @biomejs/biome lint .",
-		"preview": "wrangler pages dev",
+		"preview": "wrangler pages dev --ai AI",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@grammyjs/emoji": "^1.2.0",
+		"@grammyjs/files": "^1.1.1",
 		"@winston/db": "workspace:*",
 		"@winston/validators": "workspace:*",
+		"chrono-node": "^2.7.6",
 		"grammy": "^1.25.2",
 		"hono": "^4.4.10",
 		"zod": "^3.23.8"
