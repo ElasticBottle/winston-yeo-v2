@@ -17,6 +17,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@grammyjs/emoji": "^1.2.0",
 		"@winston/db": "workspace:*",
 		"@winston/validators": "workspace:*",
 		"grammy": "^1.25.2",

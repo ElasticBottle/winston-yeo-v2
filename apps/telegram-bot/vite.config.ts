@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
 	plugins: [
 		build({
-			entry: ["src/index.ts", "app/server.ts"],
+			entry: "src/index.ts",
 			minify: true,
 		}),
 		devServer({
@@ -14,4 +14,10 @@ export default defineConfig({
 			entry: "src/index.ts",
 		}),
 	],
+	server: {
+		port: 8787,
+	},
+	optimizeDeps: {
+		include: ["hono"],
+	},
 });

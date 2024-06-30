@@ -111,6 +111,9 @@ importers:
 
   apps/telegram-bot:
     dependencies:
+      '@grammyjs/emoji':
+        specifier: ^1.2.0
+        version: 1.2.0(grammy@1.25.2)
       '@winston/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -1142,6 +1145,11 @@ packages:
 
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
+
+  '@grammyjs/emoji@1.2.0':
+    resolution: {integrity: sha512-gpqvcuCxtk/quVyqx0VLB3KRGycvC9nB6LirD3eCjJjR0tUaPCvCqXrG2wntLWude9R8Ywbu3CmHx1JphhwJNg==}
+    peerDependencies:
+      grammy: ^1.7.1
 
   '@grammyjs/types@3.9.0':
     resolution: {integrity: sha512-QzZAbz5COBZnDlDs6x94TIIIH5Pi7AMk0rJPM2O5JAz5Q+s7Xxp3lGg/pWyiVR9Q8euRDYCJmDtcRjwwFD6a3g==}
@@ -4259,6 +4267,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.2': {}
+
+  '@grammyjs/emoji@1.2.0(grammy@1.25.2)':
+    dependencies:
+      grammy: 1.25.2
 
   '@grammyjs/types@3.9.0': {}
 
