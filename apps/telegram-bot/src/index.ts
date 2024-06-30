@@ -3,8 +3,8 @@ import type { Ai } from "@cloudflare/workers-types/experimental";
 import { type EmojiFlavor, emojiParser } from "@grammyjs/emoji";
 import { type FileFlavor, hydrateFiles } from "@grammyjs/files";
 import { parseDate } from "chrono-node";
-import { Bot, type Context, webhookCallback } from "grammy";
 import type { UserFromGetMe } from "grammy/types";
+import { Bot, type Context, webhookCallback } from "grammy/web";
 import { Hono } from "hono";
 import { envValidator } from "./middleware/env-validator";
 
