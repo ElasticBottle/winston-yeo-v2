@@ -18,6 +18,7 @@
 	},
 	"dependencies": {
 		"@grammyjs/emoji": "^1.2.0",
+		"@grammyjs/storage-cloudflare": "^2.4.2",
 		"@winston/db": "workspace:*",
 		"@winston/validators": "workspace:*",
 		"chrono-node": "^2.7.6",

@@ -1,13 +1,23 @@
+import type { KVNamespace } from "@cloudflare/workers-types";
 import type { Ai } from "@cloudflare/workers-types/experimental";
 import { type EmojiFlavor, emojiParser } from "@grammyjs/emoji";
+import { KvAdapter } from "@grammyjs/storage-cloudflare";
 import { parseDate } from "chrono-node";
 import type { Message, Update, UserFromGetMe } from "grammy/types";
-import { Bot, type Context, webhookCallback } from "grammy/web";
+import {
+	Bot,
+	type Context,
+	type SessionFlavor,
+	lazySession,
+	webhookCallback,
+} from "grammy/web";
 import { Hono } from "hono";
+import { z } from "zod";
 import { envValidator } from "./middleware/env-validator";
 
 type Bindings = {
 	AI: Ai;
+	TODO_DEMO: KVNamespace;
 	TELEGRAM_BOT_TOKEN: string;
 	TELEGRAM_BOT_INFO: string;
 };
@@ -21,11 +31,29 @@ app.post("/", async (c) => {
 		decodeURIComponent(c.env.TELEGRAM_BOT_INFO),
 	);
 
-	type BotContext = EmojiFlavor<Context>;
+	interface SessionData {
+		todo: Array<{
+			item: string;
+			tags: Array<string>;
+			dueDate?: string;
+			location?: string;
+		}>;
+	}
+	type BotContext = EmojiFlavor<Context> & SessionFlavor<SessionData>;
 
 	const bot = new Bot<BotContext>(c.env.TELEGRAM_BOT_TOKEN, {
 		botInfo,
 	});
+
+	const storage = new KvAdapter<SessionData>(c.env.TODO_DEMO);
+	bot.use(
+		lazySession({
+			initial: (): SessionData => {
+				return { todo: [] };
+			},
+			storage,
+		}),
+	);
 	bot.use(emojiParser());
 
 	bot.command("start", async (ctx) => {
@@ -38,8 +66,6 @@ app.post("/", async (c) => {
 		ctx: BotContext,
 		msg: Message & Update.NonChannel,
 	) => {
-		console.log("ctx.from", ctx.from);
-		console.log("ctx.chat", ctx.chat);
 		console.log("msg", msg);
 
 		let text = msg.text;
@@ -81,11 +107,14 @@ app.post("/", async (c) => {
 						role: "system",
 						content: `You are a world class leading assistant named Rajesh. You are tasked with helping a user manage their TODO list. 
 						
-You should be able to add, update, and delete items from the list. You should also be able to provide the user with a list of items that are due soon.
+You are a function calling AI model. You are provided with function signatures within <tools></tools> XML tags. You may call one or more functions to assist with the user query. Don't make assumptions about what values to plug into functions. Here are the available tools: <tools> [{'type': 'function', 'function': {'name': 'get_stock_fundamentals', 'description': 'Get fundamental data for a given stock symbol using yfinance API.', 'parameters': {'type': 'object', 'properties': {'symbol': {'type': 'string'}}, 'required': ['symbol']}}}] </tools> Use the following pydantic model json schema for each tool call you will make: {'title': 'FunctionCall', 'type': 'object', 'properties': {'arguments': {'title': 'Arguments', 'type': 'object'}, 'name': {'title': 'Name', 'type': 'string'}}, 'required': ['arguments', 'name']} For each function call return a json object with function name and arguments within <tool_call></tool_call> XML tags as follows:
+<tool_call>
+{'arguments': <args-dict>, 'name': <function-name>}
+</tool_call>
 
-Listen to the user's request and do your best to configure the TODO list to match the conversation.
+Listen to the user's request and do your best to configure or display the TODO list to match the conversation.
 
-When not calling tools to manage the TODO list, you should respond with a message that acknowledges the user's request an stay concise, and empathetic. 
+Always prefer calling tools. When not calling tools to manage the TODO list, you should respond with a message that acknowledges the user's request an stay concise, and empathetic. 
 
 Give no more than 2 sentence response.`,
 					},
@@ -94,7 +123,7 @@ Give no more than 2 sentence response.`,
 						content: text,
 					},
 					{
-						role: "assistant",
+						role: "system",
 						content: date
 							? `The user has requested for the given request to happen on ${date.toISOString()}`
 							: "The user has not requested for a specific date to be used.",
@@ -132,8 +161,9 @@ Give no more than 2 sentence response.`,
 					},
 					{
 						function: {
-							name: "getTodo",
-							description: "get TODOs from the list",
+							name: "getTodos",
+							description:
+								"Retrieve user TODOs from the list based on some potential filers. Not that if no parameters are specified, all TODOs will be returned. Use this is users specifies that he or she would like to see their TODOs in any way shape or form.",
 							parameters: {
 								type: "object",
 								properties: {
@@ -146,6 +176,19 @@ Give no more than 2 sentence response.`,
 										description: "The location to get TODOs for",
 									},
 								},
+								required: [],
+							},
+						},
+						type: "function",
+					},
+					{
+						function: {
+							name: "allTodos",
+							description:
+								"retrieves all the TODOs from the list. Use this if the user asks to see all their TODOs.",
+							parameters: {
+								type: "object",
+								properties: {},
 								required: [],
 							},
 						},
@@ -178,17 +221,121 @@ Give no more than 2 sentence response.`,
 
 		if ("response" in response) {
 			console.log("response", response);
-			return await ctx.reply(
-				`I heard what you said: ${text}.
-				
-In an ideal world, I would have responded with ${response.response}
+			if (response.response) {
+				return await ctx.reply(
+					`${response.response}.
+DEBUG user input: ${text}`,
+					{
+						reply_markup: {
+							force_reply: true,
+						},
+						reply_parameters: { message_id: msg.message_id },
+					},
+				);
+			}
+			if (response.tool_calls) {
+				for (const toolCall of response.tool_calls) {
+					switch (toolCall.name) {
+						case "addTodo": {
+							const todoItem = z
+								.object({
+									item: z.string(),
+									tags: z.array(z.string()).optional(),
+									dueDate: z.string().optional(),
+									location: z.string().optional(),
+								})
+								.parse(toolCall.arguments);
 
-I would also have called the following tools:
-${response.tool_calls ? formatToolUse(response.tool_calls, date) : ""}`,
-				{
-					reply_parameters: { message_id: msg.message_id },
-				},
-			);
+							(await ctx.session).todo.push({
+								item: todoItem.item,
+								tags: todoItem.tags ?? [],
+								dueDate: date?.toISOString() ?? undefined,
+								location: todoItem.location,
+							});
+							await storage.write(msg.chat.id.toString(), ctx.session);
+							return ctx.reply(
+								`Added: "${todoItem.item}
+								
+						DEBUG user input: ${text}"`,
+								{
+									reply_parameters: { message_id: msg.message_id },
+								},
+							);
+						}
+						case "getTodos": {
+							const { todo: todos } = await ctx.session;
+							const filters = z
+								.object({
+									date: z.string().optional(),
+									location: z.string().optional(),
+								})
+								.parse(toolCall.arguments);
+							console.log("filters", filters);
+							const filteredTodos = todos.filter((todo) => {
+								console.log("todo", todo);
+								if (date && todo.dueDate) {
+									return (
+										new Date(todo.dueDate).getDate() ===
+											new Date(date).getDate() &&
+										new Date(todo.dueDate).getMonth() ===
+											new Date(date).getMonth()
+									);
+								}
+								if (filters.location) {
+									return todo.location === filters.location;
+								}
+								return true;
+							});
+
+							const todoList = filteredTodos
+								.map(
+									(todo, i) =>
+										`${i + 1}. ${todo.item} ${
+											todo.dueDate ? `due on ${todo.dueDate}` : ""
+										} ${todo.location ? `at ${todo.location}` : ""}`,
+								)
+								.join("\n");
+							return ctx.reply(
+								`Your TODOs:\n${todoList}
+								
+						DEBUG user input: ${text}`,
+								{
+									reply_parameters: { message_id: msg.message_id },
+								},
+							);
+						}
+						case "allTodos": {
+							const { todo: todos } = await ctx.session;
+							if (todos.length === 0) {
+								return ctx.reply("You have no TODOs!", {
+									reply_parameters: { message_id: msg.message_id },
+								});
+							}
+							const todoList = todos
+								.map(
+									(todo, i) =>
+										`${i + 1}. ${todo.item} ${
+											todo.dueDate ? `due on ${todo.dueDate}` : ""
+										} ${todo.location ? `at ${todo.location}` : ""}`,
+								)
+								.join("\n");
+							return ctx.reply(
+								`Your TODOs:\n${todoList}
+								
+						DEBUG user input: ${text}`,
+								{
+									reply_parameters: { message_id: msg.message_id },
+								},
+							);
+						}
+						default: {
+							return ctx.reply(`I'm sorry, I didn't understand that.`, {
+								reply_parameters: { message_id: msg.message_id },
+							});
+						}
+					}
+				}
+			}
 		}
 		return await ctx.reply("I'm sorry, I didn't understand that.", {
 			reply_parameters: { message_id: msg.message_id },
@@ -212,18 +359,3 @@ app.get("/", (c) => {
 });
 
 export default app;
-
-const formatToolUse = (
-	toolUsed: Array<{
-		arguments: unknown;
-		name: string;
-	}>,
-	date: Date | null,
-) => {
-	return toolUsed
-		.map((tool) => {
-			const args = JSON.stringify(tool.arguments);
-			return `${tool.name}(${args}, date: ${date})`;
-		})
-		.join("\n");
-};
