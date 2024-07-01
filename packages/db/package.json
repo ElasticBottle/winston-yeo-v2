@@ -39,6 +39,6 @@
 		"@winston/biome-config": "workspace:*",
 		"@winston/tsconfig": "workspace:*",
 		"drizzle-kit": "^0.22.8",
-		"typescript": "^5.5.2"
+		"typescript": "^5.5.3"
 	}
 }
