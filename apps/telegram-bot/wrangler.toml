@@ -1,0 +1,27 @@
+name = "telegram-bot"
+compatibility_date = "2024-06-03"
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir= "dist"
+
+dev.port = 8787
+
+# [vars]
+# MY_VAR = "my-variable"
+
+[[kv_namespaces]]
+binding = "TODO_DEMO"
+id = "7c046a6fc9a94c1db3f1e5cb2b64d813"
+preview_id = "41d1db7cd1cc4860ba343e037eedb5c2"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+[ai]
+binding = "AI"
