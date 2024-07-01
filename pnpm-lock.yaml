@@ -12,8 +12,8 @@ importers:
         specifier: ^1.8.3
         version: 1.8.3
       '@dotenvx/dotenvx':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.5.0
+        version: 1.5.0
       '@turbo/gen':
         specifier: ^2.0.6
         version: 2.0.6(@types/node@20.14.9)(typescript@5.5.2)
@@ -525,6 +525,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@clack/core@0.3.4':
+    resolution: {integrity: sha512-H4hxZDXgHtWTwV3RAVenqcC4VbJZNegbBjlPvzOzCouXtS2y3sDvlO3IsbrPNWuLWPPlYVYPghQdSF64683Ldw==}
+
   '@cloudflare/kv-asset-handler@0.3.4':
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
@@ -573,8 +576,8 @@ packages:
   '@dabh/diagnostics@2.0.3':
     resolution: {integrity: sha512-hrlQOIi7hAfzsMqlGSFyVucrx38O+j6wiGOf//H2ecvIEqYN4ADBSS2iLMh5UFyDunCNniUIPk/q3riFv45xRA==}
 
-  '@dotenvx/dotenvx@1.1.0':
-    resolution: {integrity: sha512-O5elV5moBvs5WRzEsCDVVNMzWSK+XB34PjOBmcx1Kn/yoiBgdAJBIQEkHxZrrwSB7CLpN7w30Ra5Htg0xoSMIQ==}
+  '@dotenvx/dotenvx@1.5.0':
+    resolution: {integrity: sha512-b+LLl13eGQgXnhe6jb3smZrByVrUm+R+kfy5e15Gq8PqROcU35Txz25PHUPLrAvOiTQHZhIHjwF0XI9CNGVxJQ==}
     hasBin: true
 
   '@esbuild-kit/core-utils@3.3.2':
@@ -1183,18 +1186,6 @@ packages:
     resolution: {integrity: sha512-UBcpyOX3+RR+dNnqBd0lchXpoL8p4xC21XP8H6Meb8uve5Br1GCnmg0PcBoKKqPKgGu9GHQ/oygcmPrQhetwqw==}
     peerDependencies:
       react-hook-form: ^7.0.0
-
-  '@inquirer/confirm@2.0.17':
-    resolution: {integrity: sha512-EqzhGryzmGpy2aJf6LxJVhndxYmFs+m8cxXzf8nejb1DE3sabf6mUgBcp4J0jAUEiAcYzqmkqRr7LPFh/WdnXA==}
-    engines: {node: '>=14.18.0'}
-
-  '@inquirer/core@6.0.0':
-    resolution: {integrity: sha512-fKi63Khkisgda3ohnskNf5uZJj+zXOaBvOllHsOkdsXRA/ubQLJQrZchFFi57NKbZzkTunXiBMdvWOv71alonw==}
-    engines: {node: '>=14.18.0'}
-
-  '@inquirer/type@1.3.3':
-    resolution: {integrity: sha512-xTUt0NulylX27/zMx04ZYar/kr1raaiFTVvQ5feljQsiAgdm0WPj4S73/ye0fbslh+15QrIuDvfCXTek7pMY5A==}
-    engines: {node: '>=18'}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1843,9 +1834,6 @@ packages:
   '@types/minimatch@5.1.2':
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
-  '@types/mute-stream@0.0.4':
-    resolution: {integrity: sha512-CPM9nzrCPPJHQNA9keH9CVkVI+WR5kMa+7XEs5jcGQ0VoAGnLv242w8lIVgwAEfmE4oufJRaTc9PNLQl0ioAow==}
-
   '@types/node-forge@1.3.11':
     resolution: {integrity: sha512-FQx220y22OKNTqaByeBGqHWYz4cl94tpcxeFdvBo3wjG6XPBuZ0BNgNZRV5J5TFmmcsJ4IzsLkmGRiQbnYsBEQ==}
 
@@ -1872,9 +1860,6 @@ packages:
 
   '@types/triple-beam@1.3.5':
     resolution: {integrity: sha512-6WaYesThRMCl19iryMYP7/x2OVgCtbIVflDGFpWnb9irXI3UjYE4AzmYuiUKY1AJstGijoY+MgUszMgRxIYTYw==}
-
-  '@types/wrap-ansi@3.0.0':
-    resolution: {integrity: sha512-ltIpx+kM7g/MLRZfkbL7EsCEjfzCcScLpkg37eXEtx5kmrAKBkTJwd1GIAjDSL8wTpM6Hzn5YO4pSb91BEwu1g==}
 
   '@vercel/postgres@0.9.0':
     resolution: {integrity: sha512-WiI2g3+ce2g1u1gP41MoDj2DsMuQQ+us7vHobysRixKECGaLHpfTI7DuVZmHU087ozRAGr3GocSyqmWLLo+fig==}
@@ -2078,10 +2063,6 @@ packages:
   cli-width@3.0.0:
     resolution: {integrity: sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==}
     engines: {node: '>= 10'}
-
-  cli-width@4.1.0:
-    resolution: {integrity: sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ==}
-    engines: {node: '>= 12'}
 
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
@@ -2447,6 +2428,14 @@ packages:
 
   fastq@1.17.1:
     resolution: {integrity: sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==}
+
+  fdir@6.1.1:
+    resolution: {integrity: sha512-QfKBVg453Dyn3mr0Q0O+Tkr1r79lOTAKSi9f/Ot4+qVEwxWhav2Z+SudrG9vQjM2aYRMQQZ2/Q1zdA8ACM1pDg==}
+    peerDependencies:
+      picomatch: 3.x
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
 
   fecha@4.2.3:
     resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
@@ -2878,10 +2867,6 @@ packages:
   mute-stream@0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
 
-  mute-stream@1.0.0:
-    resolution: {integrity: sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==}
-    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
@@ -3102,6 +3087,10 @@ packages:
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
+
+  picomatch@3.0.1:
+    resolution: {integrity: sha512-I3EurrIQMlRc9IaAZnqRR044Phh2DXY+55o7uJ0V+hYZAcQYSuFWsc9q5PvyDHUSCe1Qxn/iBz+78s86zWnGag==}
+    engines: {node: '>=10'}
 
   pify@2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
@@ -3349,10 +3338,6 @@ packages:
     resolution: {integrity: sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==}
     engines: {node: '>=0.12.0'}
 
-  run-async@3.0.0:
-    resolution: {integrity: sha512-540WwVDOMxA6dN6We19EcT9sc3hkXPw5mzRNGM3FkdN/vtE9NFvj5lFAPNwUDmJjXidm3v7TC1cTE7t17Ulm1Q==}
-    engines: {node: '>=0.12.0'}
-
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
@@ -3405,6 +3390,9 @@ packages:
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
+
+  sisteransi@1.0.5:
+    resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -3923,6 +3911,11 @@ snapshots:
   '@biomejs/cli-win32-x64@1.8.3':
     optional: true
 
+  '@clack/core@0.3.4':
+    dependencies:
+      picocolors: 1.0.1
+      sisteransi: 1.0.5
+
   '@cloudflare/kv-asset-handler@0.3.4':
     dependencies:
       mime: 3.0.0
@@ -3956,9 +3949,9 @@ snapshots:
       enabled: 2.0.0
       kuler: 2.0.0
 
-  '@dotenvx/dotenvx@1.1.0':
+  '@dotenvx/dotenvx@1.5.0':
     dependencies:
-      '@inquirer/confirm': 2.0.17
+      '@clack/core': 0.3.4
       arch: 2.2.0
       chalk: 4.1.2
       commander: 11.1.0
@@ -3967,13 +3960,12 @@ snapshots:
       dotenv: 16.4.5
       eciesjs: 0.4.7
       execa: 5.1.1
-      glob: 10.4.1
+      fdir: 6.1.1(picomatch@3.0.1)
       ignore: 5.3.1
       is-wsl: 2.2.0
       object-treeify: 1.1.33
       open: 8.4.2
-      ora: 5.4.1
-      semver: 7.6.2
+      picomatch: 3.0.1
       undici: 5.28.4
       which: 4.0.0
       winston: 3.13.0
@@ -4316,31 +4308,6 @@ snapshots:
   '@hookform/resolvers@3.6.0(react-hook-form@7.52.0(react@18.3.1))':
     dependencies:
       react-hook-form: 7.52.0(react@18.3.1)
-
-  '@inquirer/confirm@2.0.17':
-    dependencies:
-      '@inquirer/core': 6.0.0
-      '@inquirer/type': 1.3.3
-      chalk: 4.1.2
-
-  '@inquirer/core@6.0.0':
-    dependencies:
-      '@inquirer/type': 1.3.3
-      '@types/mute-stream': 0.0.4
-      '@types/node': 20.14.9
-      '@types/wrap-ansi': 3.0.0
-      ansi-escapes: 4.3.2
-      chalk: 4.1.2
-      cli-spinners: 2.9.2
-      cli-width: 4.1.0
-      figures: 3.2.0
-      mute-stream: 1.0.0
-      run-async: 3.0.0
-      signal-exit: 4.1.0
-      strip-ansi: 6.0.1
-      wrap-ansi: 6.2.0
-
-  '@inquirer/type@1.3.3': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -4987,10 +4954,6 @@ snapshots:
 
   '@types/minimatch@5.1.2': {}
 
-  '@types/mute-stream@0.0.4':
-    dependencies:
-      '@types/node': 20.14.9
-
   '@types/node-forge@1.3.11':
     dependencies:
       '@types/node': 20.14.9
@@ -5023,8 +4986,6 @@ snapshots:
   '@types/tinycolor2@1.4.6': {}
 
   '@types/triple-beam@1.3.5': {}
-
-  '@types/wrap-ansi@3.0.0': {}
 
   '@vercel/postgres@0.9.0':
     dependencies:
@@ -5242,8 +5203,6 @@ snapshots:
   cli-spinners@2.9.2: {}
 
   cli-width@3.0.0: {}
-
-  cli-width@4.1.0: {}
 
   client-only@0.0.1: {}
 
@@ -5600,6 +5559,10 @@ snapshots:
   fastq@1.17.1:
     dependencies:
       reusify: 1.0.4
+
+  fdir@6.1.1(picomatch@3.0.1):
+    optionalDependencies:
+      picomatch: 3.0.1
 
   fecha@4.2.3: {}
 
@@ -6034,8 +5997,6 @@ snapshots:
 
   mute-stream@0.0.8: {}
 
-  mute-stream@1.0.0: {}
-
   mz@2.7.0:
     dependencies:
       any-promise: 1.3.0
@@ -6257,6 +6218,8 @@ snapshots:
   picocolors@1.0.1: {}
 
   picomatch@2.3.1: {}
+
+  picomatch@3.0.1: {}
 
   pify@2.3.0: {}
 
@@ -6509,8 +6472,6 @@ snapshots:
 
   run-async@2.4.1: {}
 
-  run-async@3.0.0: {}
-
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
@@ -6558,6 +6519,8 @@ snapshots:
   simple-swizzle@0.2.2:
     dependencies:
       is-arrayish: 0.3.2
+
+  sisteransi@1.0.5: {}
 
   slash@3.0.0: {}
 
