@@ -278,8 +278,8 @@ importers:
         specifier: ^0.16.1
         version: 0.16.1
       opfs-tools:
-        specifier: ^0.5.5
-        version: 0.5.5
+        specifier: ^0.5.6
+        version: 0.5.6
       react-complex-tree:
         specifier: ^2.4.4
         version: 2.4.4(react@18.3.1)
@@ -2989,8 +2989,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  opfs-tools@0.5.5:
-    resolution: {integrity: sha512-zl6quXCvSeQQSvbYiuTowpU3cw+Ig552/uCqFHbssxAgWVAbAx3UP7MY3+K2EXK6t1QdbAdo65SovTlwezBoRQ==}
+  opfs-tools@0.5.6:
+    resolution: {integrity: sha512-HPz33sPTpBE0TujNyT9v2FjnsbCbNeIIx2iv+OrFSBWnM0uHCd4lWBwI6IgsUZujWnt5Sr6Wd/pASvWWpzrXxA==}
 
   ora@4.1.1:
     resolution: {integrity: sha512-sjYP8QyVWBpBZWD6Vr1M/KwknSw6kJOz41tvGMlwWeClHBtYKTbHMki1PsLZnxKpXMPbTKv9b3pjQu3REib96A==}
@@ -6108,7 +6108,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  opfs-tools@0.5.5: {}
+  opfs-tools@0.5.6: {}
 
   ora@4.1.1:
     dependencies:
