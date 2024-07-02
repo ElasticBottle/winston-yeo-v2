@@ -113,7 +113,7 @@ importers:
     dependencies:
       '@grammyjs/emoji':
         specifier: ^1.2.0
-        version: 1.2.0(grammy@1.25.2)
+        version: 1.2.0(grammy@1.26.0)
       '@grammyjs/storage-cloudflare':
         specifier: ^2.4.2
         version: 2.4.2
@@ -127,8 +127,8 @@ importers:
         specifier: ^2.7.6
         version: 2.7.6
       grammy:
-        specifier: ^1.25.2
-        version: 1.25.2
+        specifier: ^1.26.0
+        version: 1.26.0
       hono:
         specifier: ^4.4.10
         version: 4.4.10
@@ -1163,8 +1163,8 @@ packages:
   '@grammyjs/storage-cloudflare@2.4.2':
     resolution: {integrity: sha512-r5lwDEyRRkGN7lQBEy3Qm65BIh8lLHUoDcdOB3N5+hDeuAOBW6q0a2eNFwbmk+9KuwPiRMvlOt/avgMLaoYZ/A==}
 
-  '@grammyjs/types@3.9.0':
-    resolution: {integrity: sha512-QzZAbz5COBZnDlDs6x94TIIIH5Pi7AMk0rJPM2O5JAz5Q+s7Xxp3lGg/pWyiVR9Q8euRDYCJmDtcRjwwFD6a3g==}
+  '@grammyjs/types@3.10.0':
+    resolution: {integrity: sha512-TDWn0bjTzEqG5coxnbSOCOEEkeQ3RCmf6XgJ3TBBMbLmb9eyQM1Evr8XzqLwXr9IcQvHMVeQ/lS86lkvYeADvw==}
 
   '@hono/node-server@1.11.4':
     resolution: {integrity: sha512-8TOiiiAqcFC6f62P7M9p6adQREAlWdVi1awehAwgWW+3R65/rKzHnLARO/Hu/466z01VNViBoogqatqXJMyItA==}
@@ -2532,8 +2532,8 @@ packages:
     resolution: {integrity: sha512-rEDCuqUQ4tbD78TpzsMtt5OIf0cBCSDWSJtUDaF6JsAh+k0v9r++NzxNEG87oDZx9ZwGhD8DaezR2L/yrw0Jdw==}
     engines: {node: '>=10'}
 
-  grammy@1.25.2:
-    resolution: {integrity: sha512-i1NCr2B8d5/hEHbIzqwG/1+JmIY63xVcBPCyciJB88BYKlXKsM42v5dfRVGf7AYyPxL07Em0qk42Z6YJIqR3HQ==}
+  grammy@1.26.0:
+    resolution: {integrity: sha512-jrXKDU8UzcQaecteJxuXO80trAKkbmFhaTKIVIAyS/9pLxUyqaK98XjOJjL6t6b7cnLydJtYsAkRpkQ/TUxTrQ==}
     engines: {node: ^12.20.0 || >=14.13.1}
 
   handlebars@4.7.8:
@@ -4280,13 +4280,13 @@ snapshots:
 
   '@floating-ui/utils@0.2.2': {}
 
-  '@grammyjs/emoji@1.2.0(grammy@1.25.2)':
+  '@grammyjs/emoji@1.2.0(grammy@1.26.0)':
     dependencies:
-      grammy: 1.25.2
+      grammy: 1.26.0
 
   '@grammyjs/storage-cloudflare@2.4.2': {}
 
-  '@grammyjs/types@3.9.0': {}
+  '@grammyjs/types@3.10.0': {}
 
   '@hono/node-server@1.11.4': {}
 
@@ -5675,9 +5675,9 @@ snapshots:
       chalk: 4.1.2
       tinygradient: 1.1.5
 
-  grammy@1.25.2:
+  grammy@1.26.0:
     dependencies:
-      '@grammyjs/types': 3.9.0
+      '@grammyjs/types': 3.10.0
       abort-controller: 3.0.0
       debug: 4.3.4
       node-fetch: 2.7.0
