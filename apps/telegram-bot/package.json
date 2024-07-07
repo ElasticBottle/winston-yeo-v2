@@ -22,7 +22,7 @@
 		"@winston/db": "workspace:*",
 		"@winston/validators": "workspace:*",
 		"chrono-node": "^2.7.6",
-		"grammy": "^1.26.1",
+		"grammy": "^1.27.0",
 		"hono": "^4.4.12",
 		"zod": "^3.23.8"
 	},
