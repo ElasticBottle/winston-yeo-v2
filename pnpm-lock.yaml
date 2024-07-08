@@ -63,8 +63,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/validators
       geist:
-        specifier: ^1.3.0
-        version: 1.3.0(next@14.2.4(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        specifier: ^1.3.1
+        version: 1.3.1(next@14.2.4(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       next:
         specifier: ^14.2.4
         version: 14.2.4(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2478,10 +2478,10 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
-  geist@1.3.0:
-    resolution: {integrity: sha512-IoGBfcqVEYB4bEwsfHd35jF4+X9LHRPYZymHL4YOltHSs9LJa24DYs1Z7rEMQ/lsEvaAIc61Y9aUxgcJaQ8lrg==}
+  geist@1.3.1:
+    resolution: {integrity: sha512-Q4gC1pBVPN+D579pBaz0TRRnGA4p9UK6elDY/xizXdFk/g4EKR5g0I+4p/Kj6gM0SajDBZ/0FvDV9ey9ud7BWw==}
     peerDependencies:
-      next: '>=13.2.0 <15.0.0-0'
+      next: '>=13.2.0'
 
   get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
@@ -5604,7 +5604,7 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  geist@1.3.0(next@14.2.4(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  geist@1.3.1(next@14.2.4(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       next: 14.2.4(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
