@@ -30,7 +30,7 @@
 	"dependencies": {
 		"@lexical/react": "^0.16.1",
 		"@winston/ui": "workspace:*",
-		"jotai": "^2.8.4",
+		"jotai": "^2.9.0",
 		"lexical": "^0.16.1",
 		"opfs-tools": "^0.5.7",
 		"react-complex-tree": "^2.4.4"
