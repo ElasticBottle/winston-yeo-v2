@@ -24,7 +24,7 @@
 		"@radix-ui/react-slot": "^1.1.0",
 		"@radix-ui/react-toggle": "^1.1.0",
 		"class-variance-authority": "^0.7.0",
-		"lucide-react": "^0.402.0",
+		"lucide-react": "^0.403.0",
 		"next-themes": "^0.3.0",
 		"react-hook-form": "^7.52.1",
 		"react-resizable-panels": "^2.0.20",
