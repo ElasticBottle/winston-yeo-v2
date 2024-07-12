@@ -12,8 +12,8 @@ importers:
         specifier: ^1.8.3
         version: 1.8.3
       '@dotenvx/dotenvx':
-        specifier: ^1.6.1
-        version: 1.6.1
+        specifier: ^1.6.2
+        version: 1.6.2
       '@turbo/gen':
         specifier: ^2.0.6
         version: 2.0.6(@types/node@20.14.10)(typescript@5.5.3)
@@ -573,8 +573,8 @@ packages:
   '@dabh/diagnostics@2.0.3':
     resolution: {integrity: sha512-hrlQOIi7hAfzsMqlGSFyVucrx38O+j6wiGOf//H2ecvIEqYN4ADBSS2iLMh5UFyDunCNniUIPk/q3riFv45xRA==}
 
-  '@dotenvx/dotenvx@1.6.1':
-    resolution: {integrity: sha512-dC8ZPtTmZo/i4D7TEblN4lpatLmgLcq+wqVwqittkm5vRBu8xsjX7KLLzI4hlboYK4SFSKpowjegvwMikuxmpg==}
+  '@dotenvx/dotenvx@1.6.2':
+    resolution: {integrity: sha512-uoJb4iXaXKPDhqOZdnh/EuPGYVETRj2v4xmX9Wajn3S3q/LazaXbv4K+h8gmxzKr8mmjl9ErQC7dEwru81vsXA==}
     hasBin: true
 
   '@esbuild-kit/core-utils@3.3.2':
@@ -3924,7 +3924,7 @@ snapshots:
       enabled: 2.0.0
       kuler: 2.0.0
 
-  '@dotenvx/dotenvx@1.6.1':
+  '@dotenvx/dotenvx@1.6.2':
     dependencies:
       chalk: 4.1.2
       commander: 11.1.0
