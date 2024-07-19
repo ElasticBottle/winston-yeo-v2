@@ -278,8 +278,8 @@ importers:
         specifier: ^0.16.1
         version: 0.16.1
       opfs-tools:
-        specifier: ^0.5.7
-        version: 0.5.7
+        specifier: ^0.5.8
+        version: 0.5.8
       react-complex-tree:
         specifier: ^2.4.4
         version: 2.4.4(react@18.3.1)
@@ -3007,8 +3007,8 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
-  opfs-tools@0.5.7:
-    resolution: {integrity: sha512-jxOizmfGfEWw4GleqDuF8USejoJU78Hl1mb09J9PD+EZyPcEoDUqlb1aN47A/SJ84yWEc7xvrsLBPTeJm9Z4fg==}
+  opfs-tools@0.5.8:
+    resolution: {integrity: sha512-26ZQjc6AOaASbYgLHnx+C51TuQlBDrL4Iq0v1vbExjvKAcp5xeje3XJZgWzETJcNZPHtlaKLw40Cy+wQeSYvMQ==}
 
   ora@4.1.1:
     resolution: {integrity: sha512-sjYP8QyVWBpBZWD6Vr1M/KwknSw6kJOz41tvGMlwWeClHBtYKTbHMki1PsLZnxKpXMPbTKv9b3pjQu3REib96A==}
@@ -6132,7 +6132,7 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
-  opfs-tools@0.5.7: {}
+  opfs-tools@0.5.8: {}
 
   ora@4.1.1:
     dependencies:
