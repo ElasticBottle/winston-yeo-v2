@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "vite build",
 		"clean": "git clean -xdf .turbo node_modules dist",
-		"dev": "tsx ./env-to-dev-vars.ts $(pnpm dotenvx get) && vite",
+		"dev": "dotenvx decrypt -f ./.env --stdout > .dev.vars && vite",
 		"deploy": "$npm_execpath run build && wrangler pages deploy",
 		"env:encrypt": "dotenvx encrypt -f ./.env",
 		"env:add": "dotenvx set -f ./.env --",
