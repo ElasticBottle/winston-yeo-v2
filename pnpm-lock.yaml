@@ -103,8 +103,8 @@ importers:
         specifier: ^1.21.6
         version: 1.21.6
       tailwindcss:
-        specifier: ^3.4.6
-        version: 3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+        specifier: ^3.4.7
+        version: 3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -303,8 +303,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       tailwindcss:
-        specifier: ^3.4.6
-        version: 3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+        specifier: ^3.4.7
+        version: 3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -367,8 +367,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       tailwindcss:
-        specifier: ^3.4.6
-        version: 3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+        specifier: ^3.4.7
+        version: 3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -406,14 +406,14 @@ importers:
         specifier: ^8.4.40
         version: 8.4.40
       tailwindcss:
-        specifier: ^3.4.6
-        version: 3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+        specifier: ^3.4.7
+        version: 3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)))
+        version: 1.0.7(tailwindcss@3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)))
       tailwindcss-opentype:
         specifier: ^1.1.0
-        version: 1.1.0(tailwindcss@3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)))
+        version: 1.1.0(tailwindcss@3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)))
     devDependencies:
       '@winston/biome-config':
         specifier: workspace:*
@@ -3163,10 +3163,6 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.4.39:
-    resolution: {integrity: sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.4.40:
     resolution: {integrity: sha512-YF2kKIUzAofPMpfH6hOi2cGnv/HrUlfucspc7pDyvv7kGdqXrfj8SCl/t8owkEgKEuu8ZcRjSOxFxVLqwChZ2Q==}
     engines: {node: ^10 || ^12 || >=14}
@@ -3544,8 +3540,8 @@ packages:
     peerDependencies:
       tailwindcss: '>= 3'
 
-  tailwindcss@3.4.6:
-    resolution: {integrity: sha512-1uRHzPB+Vzu57ocybfZ4jh5Q3SdlH7XW23J5sQoM9LhE9eIOlzxer/3XPSsycvih3rboRsvt0QCmzSrqyOYUIA==}
+  tailwindcss@3.4.7:
+    resolution: {integrity: sha512-rxWZbe87YJb4OcSopb7up2Ba4U82BoiSGUdoDr3Ydrg9ckxFS/YWsvhN323GMcddgU65QRy7JndC7ahhInhvlQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -6257,29 +6253,29 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  postcss-import@15.1.0(postcss@8.4.39):
+  postcss-import@15.1.0(postcss@8.4.40):
     dependencies:
-      postcss: 8.4.39
+      postcss: 8.4.40
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.4.39):
+  postcss-js@4.0.1(postcss@8.4.40):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.39
+      postcss: 8.4.40
 
-  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)):
+  postcss-load-config@4.0.2(postcss@8.4.40)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)):
     dependencies:
       lilconfig: 3.1.1
       yaml: 2.4.2
     optionalDependencies:
-      postcss: 8.4.39
+      postcss: 8.4.40
       ts-node: 10.9.2(@types/node@20.14.12)(typescript@5.5.4)
 
-  postcss-nested@6.0.1(postcss@8.4.39):
+  postcss-nested@6.0.1(postcss@8.4.40):
     dependencies:
-      postcss: 8.4.39
+      postcss: 8.4.40
       postcss-selector-parser: 6.1.0
 
   postcss-selector-parser@6.1.0:
@@ -6290,12 +6286,6 @@ snapshots:
   postcss-value-parser@4.2.0: {}
 
   postcss@8.4.31:
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
-
-  postcss@8.4.39:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.1
@@ -6662,15 +6652,15 @@ snapshots:
 
   tailwind-merge@2.4.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))):
     dependencies:
-      tailwindcss: 3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+      tailwindcss: 3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
 
-  tailwindcss-opentype@1.1.0(tailwindcss@3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))):
+  tailwindcss-opentype@1.1.0(tailwindcss@3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))):
     dependencies:
-      tailwindcss: 3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+      tailwindcss: 3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
 
-  tailwindcss@3.4.6(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)):
+  tailwindcss@3.4.7(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -6686,11 +6676,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.1
-      postcss: 8.4.39
-      postcss-import: 15.1.0(postcss@8.4.39)
-      postcss-js: 4.0.1(postcss@8.4.39)
-      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
-      postcss-nested: 6.0.1(postcss@8.4.39)
+      postcss: 8.4.40
+      postcss-import: 15.1.0(postcss@8.4.40)
+      postcss-js: 4.0.1(postcss@8.4.40)
+      postcss-load-config: 4.0.2(postcss@8.4.40)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+      postcss-nested: 6.0.1(postcss@8.4.40)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
       sucrase: 3.35.0
