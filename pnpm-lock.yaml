@@ -281,8 +281,8 @@ importers:
         specifier: ^0.5.9
         version: 0.5.9
       react-complex-tree:
-        specifier: ^2.4.4
-        version: 2.4.4(react@18.3.1)
+        specifier: ^2.4.5
+        version: 2.4.5(react@18.3.1)
     devDependencies:
       '@types/dom-speech-recognition':
         specifier: ^0.0.4
@@ -3211,8 +3211,8 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-complex-tree@2.4.4:
-    resolution: {integrity: sha512-Nltzn7oJMF9NnPxrfxRxVD/4u/ZkCVEnwQ4Em6hmZT+m/DUCorIoPsL3VV86zZXx0D2Rj6LX8dHWnYFrMmYYlw==}
+  react-complex-tree@2.4.5:
+    resolution: {integrity: sha512-RcdgHxe7uUlRHeHS8im1izuIZko3sbtrfR1ZbMuGi3I83AfpuAfQSzhCU7lNRKgAYCDyRGq+92N06uz8Wp3BDg==}
     peerDependencies:
       react: '>=16.0.0'
 
@@ -6330,7 +6330,7 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-complex-tree@2.4.4(react@18.3.1):
+  react-complex-tree@2.4.5(react@18.3.1):
     dependencies:
       react: 18.3.1
 
