@@ -38,7 +38,7 @@
 	"devDependencies": {
 		"@winston/biome-config": "workspace:*",
 		"@winston/tsconfig": "workspace:*",
-		"drizzle-kit": "^0.23.2",
+		"drizzle-kit": "^0.24.0",
 		"typescript": "^5.5.4"
 	}
 }
