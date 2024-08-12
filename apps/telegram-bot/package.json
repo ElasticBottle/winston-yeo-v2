@@ -29,7 +29,7 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240806.0",
 		"@hono/vite-cloudflare-pages": "^0.4.2",
-		"@hono/vite-dev-server": "^0.13.1",
+		"@hono/vite-dev-server": "^0.14.0",
 		"@winston/biome-config": "workspace:*",
 		"@winston/tsconfig": "workspace:*",
 		"tsx": "^4.17.0",
