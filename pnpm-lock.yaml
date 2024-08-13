@@ -272,8 +272,8 @@ importers:
         specifier: workspace:*
         version: link:../ui
       jotai:
-        specifier: ^2.9.2
-        version: 2.9.2(@types/react@18.3.3)(react@18.3.1)
+        specifier: ^2.9.3
+        version: 2.9.3(@types/react@18.3.3)(react@18.3.1)
       lexical:
         specifier: ^0.17.0
         version: 0.17.0
@@ -2792,8 +2792,8 @@ packages:
   jose@5.3.0:
     resolution: {integrity: sha512-IChe9AtAE79ru084ow8jzkN2lNrG3Ntfiv65Cvj9uOCE2m5LNsdHG+9EbxWxAoWRF9TgDOqLN5jm08++owDVRg==}
 
-  jotai@2.9.2:
-    resolution: {integrity: sha512-jIBXEadOHCziOuMY6HAy2KQcHipGhnsbF+twqh8Lcmcz/Yei0gdBtW5mOYdKmbQxGqkvfvXM3w/oHtJ2WNGSFg==}
+  jotai@2.9.3:
+    resolution: {integrity: sha512-IqMWKoXuEzWSShjd9UhalNsRGbdju5G2FrqNLQJT+Ih6p41VNYe2sav5hnwQx4HJr25jq9wRqvGSWGviGG6Gjw==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=17.0.0'
@@ -5915,7 +5915,7 @@ snapshots:
 
   jose@5.3.0: {}
 
-  jotai@2.9.2(@types/react@18.3.3)(react@18.3.1):
+  jotai@2.9.3(@types/react@18.3.3)(react@18.3.1):
     optionalDependencies:
       '@types/react': 18.3.3
       react: 18.3.1
