@@ -27,7 +27,7 @@
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20240806.0",
+		"@cloudflare/workers-types": "^4.20240815.0",
 		"@hono/vite-cloudflare-pages": "^0.4.2",
 		"@hono/vite-dev-server": "^0.14.0",
 		"@winston/biome-config": "workspace:*",
