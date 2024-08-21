@@ -130,8 +130,8 @@ importers:
         specifier: ^1.29.0
         version: 1.29.0
       hono:
-        specifier: ^4.5.6
-        version: 4.5.6
+        specifier: ^4.5.7
+        version: 4.5.7
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -141,10 +141,10 @@ importers:
         version: 4.20240815.0
       '@hono/vite-cloudflare-pages':
         specifier: ^0.4.2
-        version: 0.4.2(hono@4.5.6)
+        version: 0.4.2(hono@4.5.7)
       '@hono/vite-dev-server':
         specifier: ^0.14.0
-        version: 0.14.0(bufferutil@4.0.8)(hono@4.5.6)(utf-8-validate@6.0.4)
+        version: 0.14.0(bufferutil@4.0.8)(hono@4.5.7)(utf-8-validate@6.0.4)
       '@winston/biome-config':
         specifier: workspace:*
         version: link:../../tooling/biome-config
@@ -2656,8 +2656,8 @@ packages:
   header-case@1.0.1:
     resolution: {integrity: sha512-i0q9mkOeSuhXw6bGgiQCCBgY/jlZuV/7dZXyZ9c6LcBrqwvT8eT719E9uxE5LiZftdl+z81Ugbg/VvXV4OJOeQ==}
 
-  hono@4.5.6:
-    resolution: {integrity: sha512-9SuUC/zLQv8YAcnIxJko0KCeLI0Q6menPsDWuJ9jaH+r8ZkVXeLqeLs1QJXCPKKbURAWj9x0SJBSFh803EnAUw==}
+  hono@4.5.7:
+    resolution: {integrity: sha512-7GeBa+zuZ6rXQEcsYvoAafLNgDr3IMxoMlU1JUc23Buy99FaUpjB0viKIFOsfnzMdEp7RhPL6uLYsVuddjdMvw==}
     engines: {node: '>=16.0.0'}
 
   http-proxy-agent@7.0.2:
@@ -4384,14 +4384,14 @@ snapshots:
 
   '@hono/node-server@1.12.0': {}
 
-  '@hono/vite-cloudflare-pages@0.4.2(hono@4.5.6)':
+  '@hono/vite-cloudflare-pages@0.4.2(hono@4.5.7)':
     dependencies:
-      hono: 4.5.6
+      hono: 4.5.7
 
-  '@hono/vite-dev-server@0.14.0(bufferutil@4.0.8)(hono@4.5.6)(utf-8-validate@6.0.4)':
+  '@hono/vite-dev-server@0.14.0(bufferutil@4.0.8)(hono@4.5.7)(utf-8-validate@6.0.4)':
     dependencies:
       '@hono/node-server': 1.12.0
-      hono: 4.5.6
+      hono: 4.5.7
       miniflare: 3.20240806.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       minimatch: 9.0.4
     transitivePeerDependencies:
@@ -5783,7 +5783,7 @@ snapshots:
       no-case: 2.3.2
       upper-case: 1.1.3
 
-  hono@4.5.6: {}
+  hono@4.5.7: {}
 
   http-proxy-agent@7.0.2:
     dependencies:
