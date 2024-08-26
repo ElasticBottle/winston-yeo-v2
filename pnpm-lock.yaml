@@ -12,8 +12,8 @@ importers:
         specifier: ^1.8.3
         version: 1.8.3
       '@dotenvx/dotenvx':
-        specifier: ^1.10.3
-        version: 1.10.3
+        specifier: ^1.10.4
+        version: 1.10.4
       '@turbo/gen':
         specifier: ^2.0.14
         version: 2.0.14(@types/node@20.16.1)(typescript@5.5.4)
@@ -586,8 +586,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@dotenvx/dotenvx@1.10.3':
-    resolution: {integrity: sha512-nc5HfmNPTMVL+BOHoc4ikGgvkcUaUJn6jUUcD80T8bpRdMXoiypj5CNbe9vN3TEb23O1X0M2sSnO6HQSBd2XvA==}
+  '@dotenvx/dotenvx@1.10.4':
+    resolution: {integrity: sha512-o6V6eYEvQtfTwb9sqG7YdQz7/6JyxQHHglpGVElVXyDmdpDXRTtdfWhSKVJZfZQbeNEejnPNb8wuMfQ4lqd06Q==}
     hasBin: true
 
   '@drizzle-team/brocli@0.10.1':
@@ -3941,7 +3941,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@dotenvx/dotenvx@1.10.3':
+  '@dotenvx/dotenvx@1.10.4':
     dependencies:
       commander: 11.1.0
       dotenv: 16.4.5
