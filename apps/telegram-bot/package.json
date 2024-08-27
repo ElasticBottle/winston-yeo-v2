@@ -23,7 +23,7 @@
 		"@winston/validators": "workspace:*",
 		"chrono-node": "^2.7.6",
 		"grammy": "^1.29.0",
-		"hono": "^4.5.8",
+		"hono": "^4.5.9",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
