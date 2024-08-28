@@ -27,7 +27,7 @@
 		"@dotenvx/dotenvx": "^1.11.2",
 		"@turbo/gen": "^2.1.0",
 		"@winston/biome-config": "workspace:*",
-		"turbo": "^2.0.14",
+		"turbo": "^2.1.0",
 		"typescript": "^5.5.4"
 	}
 }
