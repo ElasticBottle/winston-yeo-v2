@@ -143,8 +143,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(hono@4.5.9)
       '@hono/vite-dev-server':
-        specifier: ^0.15.0
-        version: 0.15.0(hono@4.5.9)(miniflare@3.20240821.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(wrangler@3.72.3(@cloudflare/workers-types@4.20240821.1)(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+        specifier: ^0.15.1
+        version: 0.15.1(hono@4.5.9)(miniflare@3.20240821.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(wrangler@3.72.3(@cloudflare/workers-types@4.20240821.1)(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@winston/biome-config':
         specifier: workspace:*
         version: link:../../tooling/biome-config
@@ -1303,8 +1303,8 @@ packages:
     peerDependencies:
       hono: '*'
 
-  '@hono/vite-dev-server@0.15.0':
-    resolution: {integrity: sha512-z4sg1Kvcon7U20eb6StgRXAwNayPFcUJ+LTuMXzNw3JttxSGWkS9B3A8Tw0p8bsAdbR/I896QNVdKgWRbL3h1w==}
+  '@hono/vite-dev-server@0.15.1':
+    resolution: {integrity: sha512-9o4Up7zDlBuYLsfz1rN2EdiOxDWgSHoMM248JIZVgZ5mlrdGASBj+gyNWAlQ7pgE/A8UBoLYaXgnbJsW9nxesw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: '*'
@@ -4299,7 +4299,7 @@ snapshots:
     dependencies:
       hono: 4.5.9
 
-  '@hono/vite-dev-server@0.15.0(hono@4.5.9)(miniflare@3.20240821.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(wrangler@3.72.3(@cloudflare/workers-types@4.20240821.1)(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
+  '@hono/vite-dev-server@0.15.1(hono@4.5.9)(miniflare@3.20240821.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(wrangler@3.72.3(@cloudflare/workers-types@4.20240821.1)(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
     dependencies:
       '@hono/node-server': 1.12.0
       hono: 4.5.9
