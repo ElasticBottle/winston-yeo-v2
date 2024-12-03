@@ -24,7 +24,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",
-		"@dotenvx/dotenvx": "^1.11.5",
+		"@dotenvx/dotenvx": "^1.28.0",
 		"@turbo/gen": "^2.1.1",
 		"@winston/biome-config": "workspace:*",
 		"turbo": "^2.1.1",
