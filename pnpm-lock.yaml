@@ -33,14 +33,14 @@ importers:
         specifier: ^0.11.1
         version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
       '@tanstack/react-query':
-        specifier: ^5.53.1
-        version: 5.53.1(react@18.3.1)
+        specifier: ^5.62.3
+        version: 5.62.3(react@18.3.1)
       '@trpc/client':
         specifier: 11.0.0-rc.490
         version: 11.0.0-rc.490(@trpc/server@11.0.0-rc.490)
       '@trpc/react-query':
         specifier: 11.0.0-rc.490
-        version: 11.0.0-rc.490(@tanstack/react-query@5.53.1(react@18.3.1))(@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490))(@trpc/server@11.0.0-rc.490)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 11.0.0-rc.490(@tanstack/react-query@5.62.3(react@18.3.1))(@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490))(@trpc/server@11.0.0-rc.490)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
         specifier: 11.0.0-rc.490
         version: 11.0.0-rc.490
@@ -565,9 +565,11 @@ packages:
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
+    deprecated: 'Merged into tsx: https://tsx.is'
 
   '@esbuild-kit/esm-loader@2.6.5':
     resolution: {integrity: sha512-FxEMIkJKnodyA1OaCUoEvbYRkoZlLZ4d/eXFu9Fh8CbBBgP5EmZxrfTRyN0qpXZ4vOvqnE5YdRdcrmUUXuU+dA==}
+    deprecated: 'Merged into tsx: https://tsx.is'
 
   '@esbuild-plugins/node-globals-polyfill@0.2.3':
     resolution: {integrity: sha512-r3MIryXDeXDOZh7ih1l/yE9ZLORCd5e8vWg02azWRGj5SPTuoh69A2AIyn0Z31V/kHBfZ4HgWJ+OK3GTTwLmnw==}
@@ -1902,11 +1904,11 @@ packages:
       typescript:
         optional: true
 
-  '@tanstack/query-core@5.53.1':
-    resolution: {integrity: sha512-mvLG7s4Zy3Yvc2LsKm8BVafbmPrsReKgqwhmp4XKVmRW9us3KbWRqu3qBBfhVavcUUEHfNK7PvpTchvQpVdFpw==}
+  '@tanstack/query-core@5.62.3':
+    resolution: {integrity: sha512-Jp/nYoz8cnO7kqhOlSv8ke/0MJRJVGuZ0P/JO9KQ+f45mpN90hrerzavyTKeSoT/pOzeoOUkv1Xd0wPsxAWXfg==}
 
-  '@tanstack/react-query@5.53.1':
-    resolution: {integrity: sha512-35HU4836Ey1/W74BxmS8p9KHXcDRGPdkw6w3VX0Tc5S9v5acFl80oi/yc6nsmoLhu68wQkWMyX0h7y7cOtY5OA==}
+  '@tanstack/react-query@5.62.3':
+    resolution: {integrity: sha512-y2zDNKuhgiuMgsKkqd4AcsLIBiCfEO8U11AdrtAUihmLbRNztPrlcZqx2lH1GacZsx+y1qRRbCcJLYTtF1vKsw==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -4869,11 +4871,11 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.4
 
-  '@tanstack/query-core@5.53.1': {}
+  '@tanstack/query-core@5.62.3': {}
 
-  '@tanstack/react-query@5.53.1(react@18.3.1)':
+  '@tanstack/react-query@5.62.3(react@18.3.1)':
     dependencies:
-      '@tanstack/query-core': 5.53.1
+      '@tanstack/query-core': 5.62.3
       react: 18.3.1
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
@@ -4882,9 +4884,9 @@ snapshots:
     dependencies:
       '@trpc/server': 11.0.0-rc.490
 
-  '@trpc/react-query@11.0.0-rc.490(@tanstack/react-query@5.53.1(react@18.3.1))(@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490))(@trpc/server@11.0.0-rc.490)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@trpc/react-query@11.0.0-rc.490(@tanstack/react-query@5.62.3(react@18.3.1))(@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490))(@trpc/server@11.0.0-rc.490)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tanstack/react-query': 5.53.1(react@18.3.1)
+      '@tanstack/react-query': 5.62.3(react@18.3.1)
       '@trpc/client': 11.0.0-rc.490(@trpc/server@11.0.0-rc.490)
       '@trpc/server': 11.0.0-rc.490
       react: 18.3.1
